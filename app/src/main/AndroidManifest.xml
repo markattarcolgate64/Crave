@@ -36,17 +36,25 @@
 <!--&lt;!&ndash;            android:name="com.google.android.geo.API_KEY"&ndash;&gt;-->
 <!--            android:value="AIzaSyAWv8WlIvbekJ38sqn3F2ndXk50aFyiVAY" /> &lt;!&ndash;for holding the key info&ndash;&gt;-->
 
+
+    <activity android:name=".PlacesActivity"
+        android:exported="true"
+        android:label="@string/places_activity"
+        >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+
+
+    </activity>
         <activity
             android:name=".MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat">
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
