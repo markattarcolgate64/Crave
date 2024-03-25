@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package com.example.lowkeytravelapp
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -48,7 +48,6 @@ import com.google.android.libraries.places.api.net.PlacesClient
 /**
  * An activity that displays a map showing the place at the device's current location.
  */
-
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
@@ -71,16 +70,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var likelyPlaceAddresses: Array<String?> = arrayOfNulls(0)
     private var likelyPlaceAttributions: Array<List<*>?> = arrayOfNulls(0)
     private var likelyPlaceLatLngs: Array<LatLng?> = arrayOfNulls(0)
-    private lateinit var apiKey: String
 
     // [START maps_current_place_on_create]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val placesIntent = Intent(this, PlacesActivity:: class.java)
-        startActivity(placesIntent)
-
-
-        apiKey = BuildConfig.GOOGLE_CLOUD_API_KEY
 
         // [START_EXCLUDE silent]
         // Retrieve location and camera position from saved instance state.
@@ -197,7 +190,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Gets the current location of the device, and positions the map's camera.
      */
     // [START maps_current_place_get_device_location]
-//    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission")
     private fun getDeviceLocation() {
         /*
          * Get the best and most recent location of the device, which may be null in rare
@@ -388,7 +381,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Updates the map's UI settings based on whether the user has granted location permission.
      */
     // [START maps_current_place_update_location_ui]
-//    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission")
     private fun updateLocationUI() {
         if (map == null) {
             return
