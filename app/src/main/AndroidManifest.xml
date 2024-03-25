@@ -35,14 +35,10 @@
 <!--        <meta-data-->
 <!--&lt;!&ndash;            android:name="com.google.android.geo.API_KEY"&ndash;&gt;-->
 <!--            android:value="AIzaSyAWv8WlIvbekJ38sqn3F2ndXk50aFyiVAY" /> &lt;!&ndash;for holding the key info&ndash;&gt;-->
-
-        <activity
-            android:name=".MapsActivity"
+        <activity android:name=".InputChatActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps"
-            android:theme="@style/Theme.AppCompat">
-
-
+            android:label="@string/input_chat_activity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -50,12 +46,30 @@
 
         </activity>
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+    <activity android:name=".PlacesActivity"
+        android:exported="true"
+        android:label="@string/places_activity"
+        >
+
+    </activity>
+    <activity
+        android:name=".MapsActivity"
+        android:exported="true"
+        android:label="@string/title_activity_maps"
+        android:theme="@style/Theme.AppCompat">
+
+
+
+    </activity>
+
+    <activity
+        android:name=".MainActivity"
+        android:exported="true">
 <!--            android:theme="@style/Theme.LowkeyTravelApp">-->
 
-        </activity>
+    </activity>
+
+
     </application>
 
 </manifest>
