@@ -190,7 +190,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Gets the current location of the device, and positions the map's camera.
      */
     // [START maps_current_place_get_device_location]
-    @SuppressLint("MissingPermission")
+//    @SuppressLint("MissingPermission")
     private fun getDeviceLocation() {
         /*
          * Get the best and most recent location of the device, which may be null in rare
@@ -381,7 +381,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Updates the map's UI settings based on whether the user has granted location permission.
      */
     // [START maps_current_place_update_location_ui]
-    @SuppressLint("MissingPermission")
+//    @SuppressLint("MissingPermission")
     private fun updateLocationUI() {
         if (map == null) {
             return
