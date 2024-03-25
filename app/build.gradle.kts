@@ -84,6 +84,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("org.danilopianini:khttp:1.3.1")
+    implementation("com.google.android.material:material:1.12.0-beta01")
+
+
 }
 
 

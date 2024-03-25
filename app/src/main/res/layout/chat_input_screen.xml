@@ -17,19 +17,280 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/chatEntry"
+    <TextView
+        android:id="@+id/metric1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
-        android:hint="Type here"
-        android:maxLength="100"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Heavy"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider1"
+        app:layout_constraintTop_toTopOf="@id/slider1"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider1"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Light"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider1"
+        app:layout_constraintTop_toTopOf="@+id/slider1" />
+
+
+    <TextView
+        android:id="@+id/metric2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Sweet"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider2"
+        app:layout_constraintTop_toTopOf="@id/slider2"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider2"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/slider1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Savor"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider2"
+        app:layout_constraintTop_toTopOf="@+id/slider2" />
+
+    <TextView
+        android:id="@+id/metric3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Sweet"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider3"
+        app:layout_constraintTop_toTopOf="@id/slider3"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider3"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/slider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Savor"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider3"
+        app:layout_constraintTop_toTopOf="@+id/slider3" />
+    <TextView
+        android:id="@+id/metric4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Sweet"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider4"
+        app:layout_constraintTop_toTopOf="@id/slider4"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider4"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/slider3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Savor"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider4"
+        app:layout_constraintTop_toTopOf="@+id/slider4" />
+
+    <TextView
+        android:id="@+id/metric5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Sweet"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider5"
+        app:layout_constraintTop_toTopOf="@id/slider5"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider5"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/slider4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Savor"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider5"
+        app:layout_constraintTop_toTopOf="@+id/slider5" />
+
+    <TextView
+        android:id="@+id/metric6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+
+        android:layout_marginLeft="5dp"
+        android:text="Sweet"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/slider6"
+        app:layout_constraintTop_toTopOf="@id/slider6"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider6"
+        android:layout_width="300dp"
+        app:trackHeight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+
+        app:layout_constraintTop_toBottomOf="@id/slider5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/metric66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Savor"
+        android:textSize="14dp"
+
+        app:layout_constraintStart_toEndOf="@+id/slider6"
+        app:layout_constraintTop_toTopOf="@+id/slider6" />
+<!--    <View-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:background="@drawable/circle"-->
+<!--        android:layout_gravity="right"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/slider5"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.489"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/chatEntry"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="148dp"-->
+<!--        android:hint="Type here"-->
+<!--        android:maxLength="100"-->
+<!--        android:textSize="15dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/exploreButton"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.489"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <Button
         android:id="@+id/exploreButton"
@@ -38,22 +299,22 @@
         android:layout_marginBottom="212dp"
         android:text="Explore"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slider6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <AutoCompleteTextView
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginBottom="76dp"
-        android:textSize="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/radiusText"
-        android:hint="Distance"/>
+<!--    <AutoCompleteTextView-->
+<!--        android:layout_width="@dimen/button_width"-->
+<!--        android:layout_height="@dimen/button_height"-->
+<!--        android:layout_marginBottom="76dp"-->
+<!--        android:textSize="8dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/exploreButton"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.489"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:id="@+id/radiusText"-->
+<!--        android:hint="Distance"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
