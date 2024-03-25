@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.ComponentActivity
+import android.content.Intent
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.slider.Slider
 
@@ -57,7 +58,10 @@ class InputChatActivity: ComponentActivity() {
 //        radiusTextView.threshold=1
 //
 //        Log.i(TAG,"${radiusArr.toString()}")
-
+         exploreButton.setOnClickListener{
+             val intent = Intent(this, SliderFilter::class.java)
+             startActivity(intent)
+            }
 
 
     }
@@ -78,6 +82,8 @@ class InputChatActivity: ComponentActivity() {
         //It to Gemma, the next would be starting places
 
     }
+
+
 
     //What needs to happen in this activity is that the text needs to be sent to the LLM
     //I also need a field for radius and location

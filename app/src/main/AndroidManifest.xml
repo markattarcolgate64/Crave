@@ -69,6 +69,13 @@
 
     </activity>
 
+    <activity
+        android:name=".SliderFilter"
+        android:exported="true">
+        <!--            android:theme="@style/Theme.LowkeyTravelApp">-->
+
+    </activity>
+
 
     </application>
 

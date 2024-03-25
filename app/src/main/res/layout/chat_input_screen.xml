@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="164dp"
-        android:text="Enter what you're feeling"
+        android:text="What are you craving?"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savor"
+        android:text="Savory"
         android:textSize="14dp"
 
         app:layout_constraintStart_toEndOf="@+id/slider2"
@@ -109,7 +109,7 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Sweet"
+        android:text="Mild"
         android:textSize="14dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savor"
+        android:text="Spicy"
         android:textSize="14dp"
 
         app:layout_constraintStart_toEndOf="@+id/slider3"
@@ -150,7 +150,7 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Sweet"
+        android:text="West"
         android:textSize="14dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savor"
+        android:text="West"
         android:textSize="14dp"
 
         app:layout_constraintStart_toEndOf="@+id/slider4"
@@ -192,7 +192,7 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Sweet"
+        android:text="Veggie"
         android:textSize="14dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savor"
+        android:text="Meat"
         android:textSize="14dp"
 
         app:layout_constraintStart_toEndOf="@+id/slider5"
@@ -234,7 +234,7 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Sweet"
+        android:text="Budget"
         android:textSize="14dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +263,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savor"
+        android:text="Fancy"
         android:textSize="14dp"
 
         app:layout_constraintStart_toEndOf="@+id/slider6"
