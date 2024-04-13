@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 
 
@@ -16,11 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LowkeyTravelApp"
         tools:targetApi="31">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAjEhlgnQbhLM1LYlZ9dN-N0egcCGJp7EM" />
-
-
 
         <activity
             android:name=".MainActivity"
@@ -31,7 +32,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
 
         </activity>
 <!--        <activity android:name=".InputChatActivity"-->
@@ -48,14 +48,7 @@
 <!--            >-->
 
 <!--        </activity>-->
-
-
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true">-->
-<!--&lt;!&ndash;                        android:theme="@style/Theme.LowkeyTravelApp">&ndash;&gt;-->
-
-<!--        </activity>-->
+        
 
 
     </application>

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,11 +21,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 
-/**
- * An activity that displays a map showing the place at the device's current location.
- */
 class MapsFragment : Fragment(), OnMapReadyCallback {
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
@@ -54,6 +54,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Initialize Places SDK
+        Places.initialize(requireContext(), "AIzaSyDIsnfLnDeId7R97ZcZPC8jJRU488uPbRE")
+        placesClient = Places.createClient(requireContext())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
@@ -130,6 +133,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     /**
      * Handles the result of the request for location permissions.
      */
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
                                             grantResults: IntArray) {
@@ -170,6 +174,27 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
         }
+    }
+
+    fun searchPlaces(query: String) {
+        val request = FindAutocompletePredictionsRequest.builder()
+            .setQuery(query)
+            .build()
+
+        placesClient.findAutocompletePredictions(request)
+            .addOnSuccessListener { response ->
+                for (prediction in response.autocompletePredictions) {
+                    println("Predictions")
+                    Log.i(TAG, prediction.placeId)
+                    Log.i(TAG, prediction.getPrimaryText(null).toString())
+                    // You can add markers or handle search results here
+                }
+            }
+            .addOnFailureListener { exception ->
+                if (exception is ApiException) {
+                    Log.e(TAG, "Place not found: ${exception.statusCode}")
+                }
+            }
     }
 
     companion object {
