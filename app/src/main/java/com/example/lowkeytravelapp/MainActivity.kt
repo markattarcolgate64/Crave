@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickLi
         // Call a method in MapsFragment to perform the location lookup
         val mapsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MapsFragment
         mapsFragment.searchPlaces(query)
+        closeFoodDisplayFragment()
+
+
     }
 
     private lateinit var overlayView: View // Semi-transparent overlay view
@@ -45,8 +48,6 @@ class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickLi
         overlayView.setOnClickListener {
             closeFoodDisplayFragment()
         }
-
-
     }
 
     private fun replaceFragment(containerId: Int, replacement: Fragment) {

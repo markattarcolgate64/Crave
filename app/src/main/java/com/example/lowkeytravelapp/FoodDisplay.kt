@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.lowkeytravelapp.R.layout
 import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -29,6 +30,9 @@ class FoodDisplayFragment : Fragment() {
     private lateinit var nahbutton: Button
     private lateinit var yumbutton: Button
     var imageUrl = ""
+
+    private lateinit var overlayView: View // Semi-transparent overlay view
+
 
     private var latitude by Delegates.notNull<Double>()
     private var longitude by Delegates.notNull<Double>()
@@ -76,7 +80,7 @@ class FoodDisplayFragment : Fragment() {
         }
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_food_display, container, false)
+        val view = inflater.inflate(layout.fragment_food_display, container, false)
 
         // Initialize views
         foodImage = view.findViewById(R.id.food_image)
@@ -85,9 +89,7 @@ class FoodDisplayFragment : Fragment() {
         lookupButton = view.findViewById(R.id.lookup_button)
         nahbutton = view.findViewById(R.id.Nah)
         yumbutton = view.findViewById(R.id.Yum)
-
-
-
+        
         println("fetchImageURL()")
 //        fetchImageURL() //only 100 uses per day
 
@@ -107,8 +109,9 @@ class FoodDisplayFragment : Fragment() {
         yumbutton.setOnClickListener {
             println("yum yum")
             (activity as? OnYumButtonClickListener)?.onYumButtonClick((foodnameText.text).toString())
-            // Pass the desired location information to the hosting activity
-            //put desired location into lat and long varibles
+
+
+         // put desired location into lat and long varibles
 //            moves the camera---
     //            latitude = 0.0
     //            longitude = 0.0

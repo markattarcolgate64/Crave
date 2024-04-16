@@ -1,19 +1,18 @@
 package com.example.lowkeytravelapp
 
-import org.json.JSONObject
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import androidx.activity.ComponentActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class PlacesActivity: ComponentActivity() {
     private var TAG = "PlacesActivity"
 
-    lateinit var testButton: Button
+    private lateinit var testButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +24,9 @@ class PlacesActivity: ComponentActivity() {
         testButton.setOnClickListener{
             onTestClick()
         }
-
-
-
-
-
     }
 
-    fun onTestClick(){
+    private fun onTestClick(){
         val placesManager = PlacesTester()
         placesManager.searchPlaces()
 
@@ -50,14 +44,12 @@ class PlacesActivity: ComponentActivity() {
             CoroutineScope(Dispatchers.IO).launch{
                 val placesList = khttp.get(
                     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?&location=40.735674%2C-73.987484&radius=1000&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
-
                 )
                 try{
 
-                    var placesjsonObject: JSONObject = placesList.jsonObject
+                    val placesjsonObject: JSONObject = placesList.jsonObject
 
                     placesjsonObject.get("NextPageToken")
-
 
                     Log.i(TAG, "${placesList.jsonObject}")
  //                   Log.i(TAG, "${placesList.jsonObject}")
@@ -65,13 +57,9 @@ class PlacesActivity: ComponentActivity() {
                 } catch (error: Error){
                     Log.i(TAG, "DIDN'T WORK")
                 }
-
-
             }
         }
-
     }
-
 }
 
 

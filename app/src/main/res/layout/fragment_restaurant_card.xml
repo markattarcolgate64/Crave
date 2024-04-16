@@ -1,0 +1,46 @@
+<!-- custom_info_box.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentRootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/Rimage"
+        android:layout_width="185dp"
+        android:layout_height="77dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/baseline_restaurant" />
+
+    <TextView
+        android:id="@+id/Rname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Rprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Rname"
+        android:layout_marginEnd="-36dp"
+        android:text="$$$"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Rdesc"
+        android:layout_width="122dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/Rname"
+        android:layout_marginTop="3dp"
+        android:text="description"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

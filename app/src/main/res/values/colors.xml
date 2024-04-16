@@ -19,4 +19,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <array name="pastel_colors">
+        <item>#AED9E0</item> <!-- pastel blue -->
+        <item>#A3D9A5</item> <!-- pastel green -->
+        <item>#F3E79B</item> <!-- pastel yellow -->
+    </array>
 </resources>
