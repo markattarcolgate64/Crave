@@ -7,12 +7,15 @@ import androidx.activity.ComponentActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+import java.util.ArrayList
+
 import org.json.JSONObject
+
 
 class PlacesActivity: ComponentActivity() {
     private var TAG = "PlacesActivity"
-
-    private lateinit var testButton: Button
+    lateinit var testButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class PlacesActivity: ComponentActivity() {
         val placesManager = PlacesTester()
         placesManager.searchPlaces()
 
+
     }
 
     class PlacesTester{
@@ -37,19 +41,44 @@ class PlacesActivity: ComponentActivity() {
         //It will need a list to hold all of the JSON entries probably
         lateinit var places: List<JSONObject>
         private var TAG = "PlacesActivity"
+        private var placesStore: ArrayList<String> = arrayListOf()
+
 
 
         //Method to conduct HTTPrequest to the Google places API
         fun searchPlaces(){
             CoroutineScope(Dispatchers.IO).launch{
                 val placesList = khttp.get(
-                    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?&location=40.735674%2C-73.987484&radius=1000&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
+                    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
+                            "&location=40.735674%2C-73.987484" +
+                            "&radius=50" +
+                            "&keyword=lasagna"+
+                            "&type=restaurant" +
+                            "&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
                 )
-                try{
+
 
                     val placesjsonObject: JSONObject = placesList.jsonObject
 
-                    placesjsonObject.get("NextPageToken")
+
+
+                try{
+
+                    var placesjsonObject: JSONObject = placesList.jsonObject
+                    var next_place_token: String = ""
+                    if (placesjsonObject.has("next_place_token")) {
+                        next_place_token = placesjsonObject.getString("next_page_token")
+                    }
+
+
+                    val resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
+
+
+                    for (i in 0..resultsArr.length()-1){
+                        val placeName: String = resultsArr.getJSONObject(i).getString("name")
+                        placesStore.add(placeName)
+                    }
+
 
                     Log.i(TAG, "${placesList.jsonObject}")
  //                   Log.i(TAG, "${placesList.jsonObject}")

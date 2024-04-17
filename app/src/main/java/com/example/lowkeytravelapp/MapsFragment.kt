@@ -49,7 +49,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        val mapView = inflater.inflate(R.layout.fragment_maps, container, false)
+
+
+        return mapView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -177,24 +180,24 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun searchPlaces(query: String) {
-        val request = FindAutocompletePredictionsRequest.builder()
-            .setQuery(query)
-            .build()
-
-        placesClient.findAutocompletePredictions(request)
-            .addOnSuccessListener { response ->
-                for (prediction in response.autocompletePredictions) {
-                    println("Predictions")
-                    Log.i(TAG, prediction.placeId)
-                    Log.i(TAG, prediction.getPrimaryText(null).toString())
-                    // You can add markers or handle search results here
-                }
-            }
-            .addOnFailureListener { exception ->
-                if (exception is ApiException) {
-                    Log.e(TAG, "Place not found: ${exception.statusCode}")
-                }
-            }
+//        val request = FindAutocompletePredictionsRequest.builder()
+//            .setQuery(query)
+//            .build()
+//
+//        placesClient.findAutocompletePredictions(request)
+//            .addOnSuccessListener { response ->
+//                for (prediction in response.autocompletePredictions) {
+//                    println("Predictions")
+//                    Log.i(TAG, prediction.placeId)
+//                    Log.i(TAG, prediction.getPrimaryText(null).toString())
+//                    // You can add markers or handle search results here
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                if (exception is ApiException) {
+//                    Log.e(TAG, "Place not found: ${exception.statusCode}")
+//                }
+//            }
     }
 
     companion object {
