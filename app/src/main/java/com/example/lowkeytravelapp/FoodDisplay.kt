@@ -89,7 +89,7 @@ class FoodDisplayFragment : Fragment() {
         lookupButton = view.findViewById(R.id.lookup_button)
         nahbutton = view.findViewById(R.id.Nah)
         yumbutton = view.findViewById(R.id.Yum)
-        
+
         println("fetchImageURL()")
 //        fetchImageURL() //only 100 uses per day
 
@@ -113,9 +113,9 @@ class FoodDisplayFragment : Fragment() {
 
          // put desired location into lat and long varibles
 //            moves the camera---
-    //            latitude = 0.0
-    //            longitude = 0.0
-    //            (activity as? OnYumButtonClickListener)?.onYumButtonClick(latitude, longitude)
+//                latitude = 0.0
+//                longitude = 0.0
+//                (activity as? OnYumButtonClickListener)?.onYumButtonClick(latitude, longitude)
 
         }
         return view
