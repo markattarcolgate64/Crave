@@ -87,8 +87,8 @@ class PlacesActivity: ComponentActivity() {
                     val imageUrl = getImageUrl(photoReference, maxWidth)
 
                     Log.i("image",imageUrl)
- //                   Log.i(TAG, "${placesList.jsonObject}")
-//                  Log.i(TAG, "${placesList.jsonArray}")
+//                    Log.i(TAG, "${placesList.jsonObject}")
+//                    Log.i(TAG, "${placesList.jsonArray}")
                 } catch (error: Error){
                     Log.i(TAG, "DIDN'T WORK")
                 }
