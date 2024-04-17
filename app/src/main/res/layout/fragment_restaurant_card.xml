@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/Rimage"
-        android:layout_width="185dp"
-        android:layout_height="77dp"
+        android:layout_width="237dp"
+        android:layout_height="104dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="200dp"
         android:src="@drawable/baseline_restaurant" />
@@ -34,11 +34,21 @@
 
     <TextView
         android:id="@+id/Rdesc"
-        android:layout_width="122dp"
-        android:layout_height="49dp"
+        android:layout_width="195dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/Rname"
         android:layout_marginTop="3dp"
         android:text="description"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Adress"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Rdesc"
+        android:layout_marginTop="3dp"
+        android:text="Address"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 

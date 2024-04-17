@@ -1,14 +1,12 @@
 package com.example.lowkeytravelapp
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.ComponentActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 
 class InputChatActivity: ComponentActivity() {
     private lateinit var output: String
@@ -65,11 +63,5 @@ class InputChatActivity: ComponentActivity() {
     //I also need a field for radius and location
     //How should my radius button look?
     //Q: Rounded buttons, filters, type of place
-
-
-
-
-
-
 
 }
