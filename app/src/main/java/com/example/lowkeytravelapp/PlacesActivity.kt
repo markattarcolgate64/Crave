@@ -8,8 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
-import java.util.ArrayList
-
 import org.json.JSONObject
 
 
@@ -18,6 +16,7 @@ class PlacesActivity: ComponentActivity() {
     lateinit var testButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        println("PlacesACtivity")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.places_choice)
         Log.i(TAG, "I think we're okay")

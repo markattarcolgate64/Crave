@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickLi
     private lateinit var overlayView: View // Semi-transparent overlay view
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        println("MAIN ACTIVITY")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
 

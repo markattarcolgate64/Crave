@@ -43,7 +43,7 @@ class FoodDisplayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         fun fetchImageURL() {
-            val apiKey = "AIzaSyDS997jC5TamPh5LoKGTpdq6_NaBiD418Q"
+            val apiKey = BuildConfig.IMAGE_FETCH_API_KEY
             val cx = "62bb355ee52724715"
             val query = "Sandwich"
             val url = "https://www.googleapis.com/customsearch/v1?key=$apiKey&cx=$cx&q=$query&searchType=image&google_domain=com&gl=us&hl=en"
@@ -91,7 +91,7 @@ class FoodDisplayFragment : Fragment() {
         yumbutton = view.findViewById(R.id.Yum)
 
         println("fetchImageURL()")
-//        fetchImageURL() //only 100 uses per day
+        fetchImageURL() //only 100 uses per day
 
         // Set food information text
         val foodInfo = "Food information will be displayed here..." // Replace with actual food information
