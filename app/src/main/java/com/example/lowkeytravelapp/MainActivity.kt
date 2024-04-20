@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.lowkeytravelapp.RestaurantList
+import com.example.lowkeytravelapp.Restaurant
+
 
 
 class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickListener {
@@ -25,8 +28,15 @@ class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickLi
         println("MAIN ACTIVITY")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
+        //Loads in main maps fragment
+        //The restaurant data is passed to the maps fragment
+        val restaurants = intent.getParcelableExtra("restaurantsList", RestaurantList::class.java )
+        var mapFrag = MapsFragment()
+        val mapArgs = Bundle()
+        mapArgs.putParcelable("restaurantsList", restaurants)
+        mapFrag.arguments = mapArgs
 
-        replaceFragment(R.id.fragment_container, MapsFragment())
+        replaceFragment(R.id.fragment_container, mapFrag)
 
         // Initialize the overlay view
         overlayView = findViewById(R.id.overlay)

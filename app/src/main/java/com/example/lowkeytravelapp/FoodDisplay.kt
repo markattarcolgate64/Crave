@@ -43,7 +43,7 @@ class FoodDisplayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         fun fetchImageURL() {
-            val apiKey = BuildConfig.IMAGE_FETCH_API_KEY
+            val apiKey = BuildConfig.GOOGLE_CLOUD_API_KEY
             val cx = "62bb355ee52724715"
             val query = "Sandwich"
             val url = "https://www.googleapis.com/customsearch/v1?key=$apiKey&cx=$cx&q=$query&searchType=image&google_domain=com&gl=us&hl=en"
