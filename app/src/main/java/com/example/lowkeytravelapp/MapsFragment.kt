@@ -35,7 +35,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
+    private var apikey = BuildConfig.GOOGLE_CLOUD_API_KEY
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
@@ -51,15 +51,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         val mapView = inflater.inflate(R.layout.fragment_maps, container, false)
-
-
         return mapView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Initialize Places SDK
-        Places.initialize(requireContext(), "AIzaSyDIsnfLnDeId7R97ZcZPC8jJRU488uPbRE")
+
+        Places.initialize(requireContext(), apikey)
         placesClient = Places.createClient(requireContext())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?

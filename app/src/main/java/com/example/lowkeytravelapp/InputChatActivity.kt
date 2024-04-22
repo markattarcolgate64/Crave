@@ -38,8 +38,6 @@ class InputChatActivity: ComponentActivity() {
 
         Log.i(TAG,"${radiusArr.toString()}")
 
-
-
     }
 
 
