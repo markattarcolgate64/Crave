@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/show_more_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:rotation="270"
+        android:src="@drawable/baseline_double_arrow_24"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="TODO" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/fragment_restaurant_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_more_button"
+        android:layout_marginTop="-32dp"
+        android:layout_centerHorizontal="true" />
+        <!-- Add more custom info boxes as needed -->
+
+</RelativeLayout>
+

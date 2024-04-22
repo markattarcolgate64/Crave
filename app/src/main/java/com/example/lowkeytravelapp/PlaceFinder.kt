@@ -2,44 +2,16 @@ package com.example.lowkeytravelapp
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
-import com.example.lowkeytravelapp.RestaurantList
-import com.example.lowkeytravelapp.Restaurant
 
 
-class PlacesActivity: ComponentActivity() {
-    private var TAG = "PlacesActivity"
-    lateinit var testButton: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.places_choice)
-        Log.i(TAG, "I think we're okay")
-
-        testButton = findViewById(R.id.testButton)
-
-        testButton.setOnClickListener{
-            onTestClick()
-        }
-    }
-
-    private fun onTestClick(){
-        val placesManager = PlacesTester()
-        placesManager.searchPlaces(this, MainActivity()::class.java,"", 100, 40.713713, -73.990041)
-
-    }
-
-    class PlacesTester{
+class PlaceFinder{
 
         //It will need a list to hold all of the JSON entries probably
         lateinit var places: List<JSONObject>
@@ -64,8 +36,7 @@ class PlacesActivity: ComponentActivity() {
                 var placesjsonObject: JSONObject = placesList.jsonObject
                 if (placesjsonObject.has("status")){
                     if (placesjsonObject.getString("status") == NO_PLACES_FOUND){
-                        Toast.makeText(PlacesActivity(), "No results found", Toast.LENGTH_SHORT).show()
-
+                        println("No places found")
                     } else {
                         try{
                             var next_place_token: String = ""
@@ -94,12 +65,9 @@ class PlacesActivity: ComponentActivity() {
                         } catch (error: Error){
                             Log.i(TAG, "DIDN'T WORK")
                         }
-
                     }
                 }
-
             }
-
         }
 
         private fun parseResults(resultsArr:JSONArray, placesList: ArrayList<Restaurant>){
@@ -139,7 +107,7 @@ class PlacesActivity: ComponentActivity() {
             return "$baseUrl?photoreference=$photoReference&maxwidth=$maxWidth&key=$apiKey"
         }
     }
-}
+
 
 
 

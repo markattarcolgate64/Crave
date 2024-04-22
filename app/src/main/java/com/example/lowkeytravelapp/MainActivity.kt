@@ -6,18 +6,26 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.lowkeytravelapp.RestaurantList
-import com.example.lowkeytravelapp.Restaurant
-
 
 
 class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickListener {
 
+    private val placeFinder = PlaceFinder()
     override fun onYumButtonClick(query: String) {
         // Call a method in MapsFragment to perform the location lookup
         val mapsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MapsFragment
         mapsFragment.searchPlaces(query)
         closeFoodDisplayFragment()
+
+        // Example usage:
+        val keyword = "restaurant"
+        val radius = 5000 // Radius in meters
+        val latitude = 37.7749 // Example latitude
+        val longitude = -122.4194 // Example longitude
+
+        // Call the searchPlaces method to initiate the search
+        placeFinder.searchPlaces(this, MainActivity::class.java, keyword, radius, latitude, longitude)
+
 
 
     }
@@ -31,7 +39,9 @@ class MainActivity : AppCompatActivity(), FoodDisplayFragment.OnYumButtonClickLi
         //Loads in main maps fragment
         //The restaurant data is passed to the maps fragment
         val restaurants = intent.getParcelableExtra("restaurantsList", RestaurantList::class.java )
-        var mapFrag = MapsFragment()
+        val mapFrag = MapsFragment()
+        val lastKnownLocation = mapFrag.getLastKnownLocation()
+
         val mapArgs = Bundle()
         mapArgs.putParcelable("restaurantsList", restaurants)
         mapFrag.arguments = mapArgs
