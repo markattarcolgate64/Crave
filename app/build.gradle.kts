@@ -93,8 +93,7 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.google.android.libraries.places:places:3.4.0")
-
-
+    implementation("jp.wasabeef:picasso-transformations:2.4.0")
 
 }
 

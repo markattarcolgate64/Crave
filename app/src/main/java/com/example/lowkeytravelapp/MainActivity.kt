@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         mapFrag.arguments = mapArgs
         //val mapsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MapsFragment
         replaceFragment(R.id.fragment_container, mapFrag)
-
-
     }
 
     override fun onError(message: String) {
@@ -52,16 +50,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         foodArgs.putString("food", food)
         FoodFrag.arguments = foodArgs
         replaceFragment(R.id.fragment_container, FoodFrag)
-
-//        val restaurants = intent.getParcelableExtra("restaurantsList", RestaurantList::class.java )
-
-
-
-        // Initialize the overlay view
-
-        val latitude = 0.0
-        val longitude = 0.0
-
 
 
     }
