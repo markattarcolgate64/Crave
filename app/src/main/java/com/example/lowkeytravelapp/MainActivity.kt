@@ -1,9 +1,6 @@
 package com.example.lowkeytravelapp
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
@@ -32,7 +29,9 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         val mapArgs = Bundle()
         mapArgs.putParcelable("restaurantsList", placesList)
         mapFrag.arguments = mapArgs
+        //val mapsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MapsFragment
         replaceFragment(R.id.fragment_container, mapFrag)
+
 
     }
 
@@ -47,18 +46,22 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         setContentView(R.layout.main_layout)
         //Loads in FoodDisplay fragment
         //The restaurant data is passed to the maps fragment
-        val food = "Lasagna"
+        val food = "chow main"
         val FoodFrag = FoodDisplayFragment()
         val foodArgs = Bundle()
         foodArgs.putString("food", food)
         FoodFrag.arguments = foodArgs
         replaceFragment(R.id.fragment_container, FoodFrag)
 
+//        val restaurants = intent.getParcelableExtra("restaurantsList", RestaurantList::class.java )
+
+
 
         // Initialize the overlay view
 
         val latitude = 0.0
         val longitude = 0.0
+
 
 
     }

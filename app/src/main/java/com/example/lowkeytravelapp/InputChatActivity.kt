@@ -28,7 +28,7 @@ class InputChatActivity: ComponentActivity() {
         val skip = 10
         val radiusArr = Array(10) {(it * skip).toString()}
         for (i in radiusArr){
-            Log.i(TAG,"${i}")
+            Log.i(TAG, i)
         }
 
         val radiusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, radiusArr)
@@ -36,7 +36,7 @@ class InputChatActivity: ComponentActivity() {
         radiusTextView.setAdapter(radiusAdapter)
         radiusTextView.threshold=1
 
-        Log.i(TAG,"${radiusArr.toString()}")
+        Log.i(TAG, radiusArr.toString())
 
     }
 
@@ -46,10 +46,10 @@ class InputChatActivity: ComponentActivity() {
     fun exploreButton(){
 
 
-        var prompt: String = chatInput.text.toString()
+        val prompt: String = chatInput.text.toString()
         val radius = radiusTextView.text
 
-        Log.i(TAG, "PROMPT: ${prompt}  RADIUS: ${radius}")
+        Log.i(TAG, "PROMPT: $prompt  RADIUS: $radius")
 
         //There are probably a couple of services we need to launch here
         //First would be packaging the data the correct way and then sending

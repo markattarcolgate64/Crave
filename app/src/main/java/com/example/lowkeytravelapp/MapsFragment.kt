@@ -20,7 +20,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
@@ -78,12 +77,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         updateLocationUI()
         getDeviceLocation()
 
-        val restaurantList = arguments?.getParcelable("restaurantsList", RestaurantList::class.java)
-        val restaurants: ArrayList<Restaurant> = restaurantList!!.restaurants
-        for (restaurant in restaurants) {
-            val location = LatLng(restaurant.latitude, restaurant.longitude)
-            map!!.addMarker(MarkerOptions().position(location).title(restaurant.name).snippet(restaurant.address))
-        }
+//        val restaurantList = arguments?.getParcelable("restaurantsList", RestaurantList::class.java)
+//        val restaurants: ArrayList<Restaurant> = restaurantList!!.restaurants
+//        for (restaurant in restaurants) {
+//            val location = LatLng(restaurant.latitude, restaurant.longitude)
+//            map!!.addMarker(MarkerOptions().position(location).title(restaurant.name).snippet(restaurant.address))
+//        }
     }
 
     /**
@@ -186,7 +185,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    fun searchPlaces(query: String) {
+//    fun searchPlaces(query: String) {
 //        val request = FindAutocompletePredictionsRequest.builder()
 //            .setQuery(query)
 //            .build()
@@ -205,7 +204,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 //                    Log.e(TAG, "Place not found: ${exception.statusCode}")
 //                }
 //            }
-    }
+//    }
 
     fun getLastKnownLocation(): Location? {
         return lastKnownLocation

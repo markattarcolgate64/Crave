@@ -4,79 +4,74 @@
     android:layout_height="match_parent">
 
     <!-- CardView for displaying food information -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/card_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:background="@android:color/white"-->
+<!--        android:elevation="4dp"-->
+<!--        android:radius="16dp"-->
+<!--        android:foreground="?android:attr/selectableItemBackground">-->
+
+<!--        <RelativeLayout-->
+
+    <TextView
+        android:id="@+id/Food_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/food_image"
+        android:textSize="24sp"
+
+
+        android:text="Why dont you try: Sandwhich" />
+
+    <ImageView
+        android:id="@+id/food_image"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp"
-        android:radius="16dp"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:layout_marginTop="16dp"
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="305dp">
-
-            <TextView
-                android:id="@+id/Food_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="72dp"
-                android:text="Sandwhich" />
-
-            <ImageView
-                android:id="@+id/food_image"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_below="@id/Food_text"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/baseline_fastfood" />
+        android:background="@drawable/circular_background"
+        android:src="@drawable/baseline_fastfood"
+        android:contentDescription="TODO" />
 
             <!-- Button for looking up the food on Wikipedia -->
 
-            <TextView
-                android:id="@+id/food_information_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/food_image"
-                android:text="Food information will be displayed here..."
-                android:textSize="16sp" />
+    <Button
+        android:id="@+id/lookup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/food_image"
+        android:layout_marginStart="-70dp"
+        android:layout_toEndOf="@id/food_image"
+        android:text="More Info" />
 
-            <Button
-                android:id="@+id/lookup_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/food_information_text"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="200dp"
-                android:layout_toEndOf="@id/food_image"
-                android:text="More Info" />
-            <Button
-                android:id="@+id/Nah"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/food_information_text"
-                android:layout_marginStart="-150dp"
-                android:layout_marginTop="200dp"
-                android:layout_toEndOf="@id/food_image"
-                android:text="Nah" />
-            <Button
-                android:id="@+id/Yum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/food_information_text"
-                android:layout_marginStart="-50dp"
-                android:layout_marginTop="200dp"
-                android:layout_toEndOf="@id/food_image"
-                android:text="Yum" />
+    <Button
+        android:id="@+id/Nah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/food_image"
+        android:layout_marginStart="-180dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@id/food_image"
+        android:text="Nah" />
 
-        </RelativeLayout>
+    <Button
+        android:id="@+id/Yum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/food_image"
+        android:layout_marginStart="-290dp"
+        android:layout_marginTop="-1dp"
+        android:layout_toEndOf="@id/food_image"
+        android:text="Yum" />
 
-    </androidx.cardview.widget.CardView>
+    <!--        </RelativeLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
 </RelativeLayout>

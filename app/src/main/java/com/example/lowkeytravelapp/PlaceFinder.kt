@@ -31,7 +31,7 @@ class PlaceFinder{
                     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                             "&location=$lat%2C$lon" +
                             "&radius=$radius" +
-                            "&keyword=$keyword"+
+                            "&keyword=$keyword" +
                             "&type=restaurant" +
                             "&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
                 )
