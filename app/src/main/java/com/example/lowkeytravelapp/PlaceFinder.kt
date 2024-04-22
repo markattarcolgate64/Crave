@@ -13,6 +13,8 @@ import org.json.JSONObject
 
 class PlaceFinder{
 
+        lateinit var callback: OnPlacesReadyCallback
+
         //It will need a list to hold all of the JSON entries probably
         lateinit var places: List<JSONObject>
         private var TAG = "PlacesActivity"
@@ -23,7 +25,7 @@ class PlaceFinder{
 
 
         //Method to conduct HTTPrequest to the Google places API
-        fun searchPlaces(context: Context, sendActivity: Class<out AppCompatActivity> ,keyword:String, radius: Int, lat:Double, lon:Double){
+        fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double){
             CoroutineScope(Dispatchers.IO).launch{
                 val placesList = khttp.get(
                     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
@@ -61,7 +63,8 @@ class PlaceFinder{
                                 val new_resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
                                 parseResults(new_resultsArr, placesStore)
                             }
-                            sendResults(context, placesStore, sendActivity)
+
+                            callback.onPlacesReady(RestaurantList(placesStore))
                         } catch (error: Error){
                             Log.i(TAG, "DIDN'T WORK")
                         }
