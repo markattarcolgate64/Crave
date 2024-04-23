@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 
 
 class PlaceFinder{
@@ -19,14 +23,14 @@ class PlaceFinder{
         lateinit var places: List<JSONObject>
         private var TAG = "PlacesActivity"
         private val NO_PLACES_FOUND = "ZERO_RESULTS"
+        private var flag = false
         private var placesStore: ArrayList<Restaurant> = arrayListOf()
 
 
 
-
         //Method to conduct HTTPrequest to the Google places API
-        fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double){
-            CoroutineScope(Dispatchers.IO).launch{
+        fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double): RestaurantList{
+           // viewModelScope.launch(Dispatchers.IO){
                 val placesList = khttp.get(
                     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                             "&location=$lat%2C$lon" +
@@ -38,7 +42,8 @@ class PlaceFinder{
                 var placesjsonObject: JSONObject = placesList.jsonObject
                 if (placesjsonObject.has("status")){
                     if (placesjsonObject.getString("status") == NO_PLACES_FOUND){
-                        println("No places found")
+                        flag = true
+                       Log.i(TAG,"No places found")
                     } else {
                         try{
                             var next_place_token: String = ""
@@ -63,14 +68,19 @@ class PlaceFinder{
                                 val new_resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
                                 parseResults(new_resultsArr, placesStore)
                             }
-
-                            callback.onPlacesReady(RestaurantList(placesStore))
+//                           withContext(Dispatchers.Main){
+//                               callback.onPlacesReady(RestaurantList(placesStore))
+//                           }
+                            return RestaurantList(placesStore)
                         } catch (error: Error){
                             Log.i(TAG, "DIDN'T WORK")
                         }
-                    }
+                    //}
                 }
             }
+            Log.i(TAG, "DIDN'T PASS IF STATEMENT")
+            return RestaurantList(placesStore)
+
         }
 
         private fun parseResults(resultsArr:JSONArray, placesList: ArrayList<Restaurant>){
@@ -95,14 +105,6 @@ class PlaceFinder{
 
         }
 
-        private fun sendResults(context: Context, placesList: ArrayList<Restaurant>, sendActivity: Class<out AppCompatActivity>){
-            //Uses custom RestaurantList class that is a list of the Restaurant class
-            val restaurants = RestaurantList(placesList)
-            //Define the intent
-            val sendIntent = Intent(context, sendActivity).putExtra("restaurantsList", restaurants)
-            //Start the target activity
-            context.startActivity(sendIntent)
-        }
 
         private fun getImageUrl(photoReference: String, maxWidth: Int): String {
             val apiKey = BuildConfig.GOOGLE_CLOUD_API_KEY

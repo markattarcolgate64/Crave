@@ -22,12 +22,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="YOUR_API_KEY" />
 
-        <activity android:name=".LocationSearch"
-            android:exported="true"
-            android:label="@string/search_activity"
-            android:theme="@style/Theme.AppCompat.DayNight">
-        </activity>
-
 
         <activity
             android:name=".MainActivity"

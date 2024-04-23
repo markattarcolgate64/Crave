@@ -100,7 +100,7 @@ class FoodDisplayFragment : Fragment() {
 
         yumbutton.setOnClickListener {
             println("yum yum")
-            (activity as? YumInterface)?.onYumButtonClick((foodnameText.text).toString())
+            (activity as? YumInterface)?.onYumButtonClick(foodName)
 
 
          // put desired location into lat and long varibles
