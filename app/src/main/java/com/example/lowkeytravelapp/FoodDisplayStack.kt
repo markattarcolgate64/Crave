@@ -198,7 +198,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
                 supportsChangeAnimations = false
             }
         }
-
     }
 
     private suspend fun initializeAdapter(): CardStackAdapter {
@@ -209,8 +208,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
             }
         }
     }
-
-
 
     private fun paginate() {
         val old = adapter.getSpots()
@@ -395,8 +392,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
     }
 
     private fun createSpots(callback: (List<Spot>) -> Unit) {
-//        val foods = listOf("Pizza", "Burger", "Sushi")
-
         createSpot(foodNames, callback)
     }
 
