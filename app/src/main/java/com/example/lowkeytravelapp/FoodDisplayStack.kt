@@ -50,6 +50,8 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
     private lateinit var manager: CardStackLayoutManager
     private lateinit var adapter: CardStackAdapter
     private lateinit var foodNames: ArrayList<String>
+    private var listener: OnFragmentClosedListener? = null
+    private var index = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,10 +77,9 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
             cardStackView.adapter = adapter
         }
 
+        view?.let { setupNavigation(it) }
+        view?.let { setupButton(it) }
         initialize()
-
-//        println("fetchImageURL()")
-//        FoodDisplayFragment().fetchImageURL(foodNames[0])
 
         setupNavigation(view)
 
@@ -100,14 +101,8 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        view?.let { setupNavigation(it) }
-        view?.let { setupButton(it) }
-
-//        setupCardStackView()
     }
 
     override fun onCardDragging(direction: Direction, ratio: Float) {
@@ -119,6 +114,8 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
         if (manager.topPosition == adapter.itemCount - 5) {
             paginate()
         }
+        println("swiped my guy: $index : ${foodNames[index]}")
+        closeFragmentWithData(foodNames[index])
     }
 
     override fun onCardRewound() {
@@ -154,6 +151,7 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
                 .build()
             manager.setSwipeAnimationSetting(setting)
             cardStackView.swipe()
+            index ++
         }
 
         val rewind = view.findViewById<View>(R.id.rewind_button)
@@ -165,6 +163,7 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
                 .build()
             manager.setRewindAnimationSetting(setting)
             cardStackView.rewind()
+            index --
         }
 
         val like = view.findViewById<View>(R.id.like_button)
@@ -176,6 +175,7 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
                 .build()
             manager.setSwipeAnimationSetting(setting)
             cardStackView.swipe()
+            index ++
         }
     }
 
@@ -297,7 +297,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
             }
         }
     }
-
 
     private fun removeFirst(size: Int) {
         if (adapter.getSpots().isEmpty()) {
@@ -458,4 +457,20 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
         })
     }
 
+
+
+    fun setOnFragmentClosedListener(listener: OnFragmentClosedListener) {
+        this.listener = listener
+    }
+
+    fun closeFragmentWithData(data: String) {
+        // Call the interface method to send data back to the activity
+        (activity as? OnFragmentClosedListener)?.onFragmentClosed(data)
+        // Remove the fragment from the activity
+        fragmentManager?.beginTransaction()?.remove(this)?.commit()
+    }
+
+    interface OnFragmentClosedListener {
+        fun onFragmentClosed(data: String)
+    }
 }

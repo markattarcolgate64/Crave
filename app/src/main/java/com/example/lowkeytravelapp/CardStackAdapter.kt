@@ -1,6 +1,5 @@
 package com.example.lowkeytravelapp
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ class CardStackAdapter(
         val spot = spots[position]
         holder.name.text = "${spot.id}. ${spot.name}"
         val url = spot.url
-        println("url ${url}")
+        println("url $url")
         // Load image using Glide
         Glide.with(holder.itemView)
             .load(spot.url)
@@ -38,7 +37,6 @@ class CardStackAdapter(
         holder.itemView.setOnClickListener { v ->
             Toast.makeText(v.context, spot.name, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -55,7 +53,6 @@ class CardStackAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.item_name)
-        // Add city TextView if needed
         var image: ImageView = view.findViewById(R.id.item_image)
     }
 

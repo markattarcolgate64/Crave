@@ -21,45 +21,22 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
-class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
+class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
+    FoodDisplayStackFragment.OnFragmentClosedListener {
 
+    private var latitude = 40.713713//location!!.latitude
+    // Example latitude
+    private var longitude = -73.99004//location.longitude // Example longitude
 
     companion object{
         val TAG = "MainActivity"
     }
 
-    override fun onYumButtonClick(query: String) {
-        // Call a method in MapsFragment to perform the location lookup
-//        val mapsFragment = MapsFragment()
-//        val location = mapsFragment.getLastKnownLocation()
-        // Example usage:
-        val radius = 100 // Radius in meters
-        val latitude = 40.713713//location!!.latitude
-        // Example latitude
-        val longitude = -73.99004//location.longitude // Example longitude
-
-        // Call the searchPlaces method to initiate the search
-
-        CoroutineScope(Dispatchers.IO).launch{
-            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
-                query,
-                radius,
-                latitude,
-                longitude
-            )
-            withContext(Dispatchers.Main){
-                onPlacesReady(restaurants)
-            }
-        }
-    }
-
     override fun onPlacesReady(placesList: RestaurantList) {
-
         val mapFrag = MapsFragment()
         val mapArgs = Bundle()
         mapArgs.putParcelable("restaurantsList", placesList)
         mapFrag.arguments = mapArgs
-        //val mapsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MapsFragment
         replaceFragment(R.id.fragment_container, mapFrag)
     }
 
@@ -86,19 +63,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
 //
 //        viewModel.searchPlaces("", 100, 40.713713, 73.990041)
 
-//        val food = "pasta,bread,apple"
-//        val foodFrag = FoodDisplayStackFragment()
-//        val foodArgs = Bundle()
-//        foodArgs.putString("food", food)
-//        foodFrag.arguments = foodArgs
-//        replaceFragment(R.id.fragment_container, foodFrag)
-
-    }
-
-    private fun replaceFragment(containerId: Int, replacement: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(containerId, replacement)
-            .commit()
     }
 
     private fun gptFilter(){
@@ -138,7 +102,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         }else{
             "Very heavy to Eat"
         }
-
 
         sweet_value = if ( sweet < 1 ){
             "Very sweet"
@@ -243,6 +206,7 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
                     foodArgs.putStringArrayList("food", ArrayList(foodString))
                     foodSackFrag.arguments = foodArgs
                     replaceFragment(R.id.fragment_container, foodSackFrag)
+                    // Set this activity as the listener for fragment events
                     Log.d("Return from GPT","Response: ${chatResponse?.choices?.firstOrNull()?.message?.content}" )
                 } else {
                     println("Failed to get response")
@@ -257,13 +221,38 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
                 println("Error: ${t.message}")
             }
         })
-//
-
-//        headerElement = findViewById(R.id.header)
-//        val floatValue = intent.getFloatExtra("Key", 0.0f)
-
-
     }
+
+    override fun onFragmentClosed(data: String) {
+        // Handle the data received from the fragment here
+        println("Data received from fragment: $data ")
+        val radius = 100 // Radius in meters
+//        Example longitude
+        latitude = 40.713713//location!!.latitude
+        longitude = -73.99004//location.longitude
+
+        // Call the searchPlaces method to initiate the search
+
+        CoroutineScope(Dispatchers.IO).launch{
+            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
+                data,
+                radius,
+                latitude,
+                longitude
+            )
+            withContext(Dispatchers.Main){
+                onPlacesReady(restaurants)
+            }
+        }
+        // You can perform any actions you need with the received data
+    }
+
+    private fun replaceFragment(containerId: Int, replacement: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(containerId, replacement)
+            .commit()
+    }
+
 }
 
 interface OpenAIApiService {
@@ -290,9 +279,3 @@ data class ChatResponse(
 data class Choice(
     val message: Message
 )
-
-
-
-
-
-

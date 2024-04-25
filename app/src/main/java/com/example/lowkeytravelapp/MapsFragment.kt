@@ -4,11 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -25,7 +27,7 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
-    private var map: GoogleMap? = null
+    var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
 
     // The entry point to the Places API.
@@ -49,6 +51,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         val mapView = inflater.inflate(R.layout.fragment_maps, container, false)
+
         return mapView
     }
 
@@ -72,16 +75,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
      * Manipulates the map when it's available.
      * This callback is triggered when the map is ready to be used.
      */
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getLocationPermission()
         updateLocationUI()
         getDeviceLocation()
 
+        println("arguments $arguments")
+
         val restaurantList = arguments?.getParcelable("restaurantsList", RestaurantList::class.java)
         val restaurants: ArrayList<Restaurant> = restaurantList!!.restaurants
         for (restaurant in restaurants) {
             val location = LatLng(restaurant.latitude, restaurant.longitude)
+            println("location: $location Name: ${restaurant.name}")
             map!!.addMarker(MarkerOptions().position(location).title(restaurant.name).snippet(restaurant.address))
         }
     }
