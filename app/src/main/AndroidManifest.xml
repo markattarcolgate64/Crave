@@ -28,16 +28,19 @@
             android:exported="true"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat">
+
+        </activity>
+
+        <activity android:name=".InputChatActivity"
+            android:exported="true"
+            android:label="@string/input_chat_activity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".InputChatActivity"
-            android:exported="true"
-            android:label="@string/input_chat_activity">
-        </activity>
+        
 
     </application>
 

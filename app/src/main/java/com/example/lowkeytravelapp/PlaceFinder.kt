@@ -27,7 +27,6 @@ class PlaceFinder{
         private var placesStore: ArrayList<Restaurant> = arrayListOf()
 
 
-
         //Method to conduct HTTPrequest to the Google places API
         fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double): RestaurantList{
            // viewModelScope.launch(Dispatchers.IO){

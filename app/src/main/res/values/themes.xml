@@ -24,11 +24,14 @@
 <resources>
 
 <!-- Base application theme. -->
-<style name="Theme.LowkeyTravelApp" parent="android:Theme.Material.Light.NoActionBar">
+<style name="Theme.LowkeyTravelApp" parent="Theme.MaterialComponents.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
 </style>
+
+
+
 
 </resources>
