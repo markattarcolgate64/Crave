@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +23,6 @@ import retrofit2.http.POST
 
 class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
 
-    //private lateinit var viewModel: PlaceFinder
 
     companion object{
         val TAG = "MainActivity"
@@ -36,7 +33,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
 //        val mapsFragment = MapsFragment()
 //        val location = mapsFragment.getLastKnownLocation()
         // Example usage:
-        val keyword = query
         val radius = 100 // Radius in meters
         val latitude = 40.713713//location!!.latitude
         // Example latitude
@@ -45,7 +41,12 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         // Call the searchPlaces method to initiate the search
 
         CoroutineScope(Dispatchers.IO).launch{
-            val restaurants:RestaurantList = PlaceFinder().searchPlaces(keyword, radius, latitude, longitude)
+            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
+                query,
+                radius,
+                latitude,
+                longitude
+            )
             withContext(Dispatchers.Main){
                 onPlacesReady(restaurants)
             }
@@ -77,6 +78,21 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         //viewModel = ViewModelProvider(this).get(PlaceFinder::class.java)
         //37.422131, -122.084801
         //viewModel.searchPlaces("", 100, 40.713713, 73.990041)
+
+        //Loads in FoodDisplay fragment
+        //The restaurant data is passed to the maps fragment
+//        viewModel = ViewModelProvider(this).get(PlaceFinder::class.java)
+//
+//
+//        viewModel.searchPlaces("", 100, 40.713713, 73.990041)
+
+//        val food = "pasta,bread,apple"
+//        val foodFrag = FoodDisplayStackFragment()
+//        val foodArgs = Bundle()
+//        foodArgs.putString("food", food)
+//        foodFrag.arguments = foodArgs
+//        replaceFragment(R.id.fragment_container, foodFrag)
+
     }
 
     private fun replaceFragment(containerId: Int, replacement: Fragment) {
@@ -109,96 +125,91 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
         var veggie_value = ""
         var time_value = ""
 
-
-
-
-
-        if ( light < 1 ){
-            light_value = "Very Light to Eat"
+        light_value = if ( light < 1 ){
+            "Very Light to Eat"
         }else if(light < 2 ){
-            light_value = "Relatively Light to Eat"
+            "Relatively Light to Eat"
         }else if(light < 3 ){
-            light_value = "Not too heavy, not to light to eat. But slightly on the light side"
+            "Not too heavy, not to light to eat. But slightly on the light side"
         }else if(light < 4 ){
-            light_value = "Not too heavy, not to light to eat. But slightly on the heavy side"
+            "Not too heavy, not to light to eat. But slightly on the heavy side"
         }else if(light < 5 ){
-            light_value = "Relatively heavy to Eat"
+            "Relatively heavy to Eat"
         }else{
-            light_value = "Very heavy to Eat"
+            "Very heavy to Eat"
         }
 
 
-        if ( sweet < 1 ){
-            sweet_value = "Very sweet"
+        sweet_value = if ( sweet < 1 ){
+            "Very sweet"
         }else if(sweet < 2 ){
-            sweet_value = "Relatively sweet"
+            "Relatively sweet"
         }else if(sweet < 3 ){
-            sweet_value = "Not too sweet, not to savory to eat. But slightly on the sweet side"
+            "Not too sweet, not to savory to eat. But slightly on the sweet side"
         }else if(sweet < 4 ){
-            sweet_value = "Not too sweet, not to savory to eat. But slightly on the savory side"
+            "Not too sweet, not to savory to eat. But slightly on the savory side"
         }else if(sweet < 5 ){
-            sweet_value = "Relatively savory"
+            "Relatively savory"
         }else{
-            sweet_value = "Very savory"
+            "Very savory"
         }
 
-        if ( mild < 1 ){
-            mild_value = "Very mild. "
+        mild_value = if ( mild < 1 ){
+            "Very mild. "
         }else if(mild < 2 ){
-            mild_value = "Relatively mild, slight amount of spice"
+            "Relatively mild, slight amount of spice"
         }else if(mild < 3 ){
-            mild_value = "slightly below average spice level"
+            "slightly below average spice level"
         }else if(mild < 4 ){
-            mild_value = "slightly above average spice level"
+            "slightly above average spice level"
         }else if(mild < 5 ){
-            mild_value = "Relatively spicy"
+            "Relatively spicy"
         }else{
-            mild_value = "Very spicy"
+            "Very spicy"
         }
 
-        if ( west < 1 ){
-            west_value = "Comes From Cuba. "
+        west_value = if ( west < 1 ){
+            "Comes From Cuba. "
         }else if(west < 2 ){
-            west_value = "Comes From Spain. "
+            "Comes From Spain. "
         }else if(west < 3 ){
-            west_value = "Comes from Egypt"
+            "Comes from Egypt"
         }else if(west < 4 ){
-            west_value = "Comes from India"
+            "Comes from India"
         }else if(west < 5 ){
-            west_value = "Comes From Japan"
+            "Comes From Japan"
         }else{
-            west_value = "Comes from Australia"
+            "Comes from Australia"
         }
 
-        if ( veggie < 1 ){
-            veggie_value = "Fully Vegetarian "
+        veggie_value = if ( veggie < 1 ){
+            "Fully Vegetarian "
         }else if(veggie < 2 ){
-            veggie_value = "Majorly Vegetarian but may contain some meat. "
+            "Majorly Vegetarian but may contain some meat. "
         }else if(veggie < 3 ){
-            veggie_value = "Combination of meat and veggies, but slightly heavier on veggies"
+            "Combination of meat and veggies, but slightly heavier on veggies"
         }else if(veggie < 4 ){
-            veggie_value = "Combination of meat and veggies, but slightly heavier on meat"
+            "Combination of meat and veggies, but slightly heavier on meat"
         }else if(veggie < 5 ){
-            veggie_value = "Majorly meat dish but may contain some veggies."
+            "Majorly meat dish but may contain some veggies."
         }else{
-            veggie_value = "Made of only meat"
+            "Made of only meat"
         }
 
 
-        if ( time < 1 ){
-            time_value = "Served as a breakfast "
+        time_value = if ( time < 1 ){
+            "Served as a breakfast "
         }else if(time < 2 ){
-            time_value = "Served as a mead in between breakfast and lunch "
+            "Served as a mead in between breakfast and lunch "
         }else if(time < 3 ){
-            time_value = "served as a lunch"
+            "served as a lunch"
         }else if(time < 4 ){
-            time_value = "Meal in between lunch and dinner"
+            "Meal in between lunch and dinner"
         }else if(time < 5 ){
-            time_value = "Dinner"
+            "Dinner"
         }else{
-            time_value = "Late night snack/food"
+            "Late night snack/food"
         }
-
 
         val food_description = "Generate me a name of a 5 dishes separated by commas that has the following description:" + light_value + ", " + sweet_value + ", " + mild_value + ", " + west_value + ", " + veggie_value + ", " + time_value
         val client = OkHttpClient.Builder()
@@ -226,12 +237,12 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
                 if (response.isSuccessful) {
                     val chatResponse = response.body()
                     val food = chatResponse?.choices?.firstOrNull()?.message?.content
-                    val foodString = food.toString().split(", ")
-                    val FoodFrag = FoodDisplayFragment()
+                    val foodString: List<String> = food.toString().split(", ")
+                    val foodSackFrag = FoodDisplayStackFragment()
                     val foodArgs = Bundle()
-                    foodArgs.putString("food", foodString[0])
-                    FoodFrag.arguments = foodArgs
-                    replaceFragment(R.id.fragment_container, FoodFrag)
+                    foodArgs.putStringArrayList("food", ArrayList(foodString))
+                    foodSackFrag.arguments = foodArgs
+                    replaceFragment(R.id.fragment_container, foodSackFrag)
                     Log.d("Return from GPT","Response: ${chatResponse?.choices?.firstOrNull()?.message?.content}" )
                 } else {
                     println("Failed to get response")
@@ -253,10 +264,6 @@ class MainActivity : AppCompatActivity(), YumInterface, OnPlacesReadyCallback {
 
 
     }
-
-
-
-
 }
 
 interface OpenAIApiService {

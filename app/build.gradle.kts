@@ -5,6 +5,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    kotlin("kapt") // Apply the Kotlin Kapt plugin
+
 
 }
 
@@ -54,6 +56,7 @@ android {
         viewBinding = true
 
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -67,7 +70,11 @@ android {
 dependencies {
 
     implementation ("jp.wasabeef:picasso-transformations:2.4.0")
-
+//    implementation( "com.yuyakaido.android:card-stack-view:2.3.4")
+    implementation ("com.github.yuyakaido:cardstackview:2.3.4")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -82,6 +89,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.android.libraries.places:places:3.4.0")
+    implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
