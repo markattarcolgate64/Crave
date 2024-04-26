@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
-class MapsFragment : Fragment(), OnMapReadyCallback {
+class MapsFragment : Fragment(), OnMapReadyCallback, RestaurantListInterface {
     var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
 
@@ -223,5 +223,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         const val DEFAULT_ZOOM = 15
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
         private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    }
+
+    override fun onFoodItemClick(restaurant: Restaurant) {
+        //Implement code to move camera
+        val restaurantName = restaurant.name
+        Log.i(TAG, "Interface working")
+
     }
 }

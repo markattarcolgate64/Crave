@@ -16,7 +16,6 @@ class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameview: TextView
         val imageView: ImageView
-
         init {
             // Define click listener for the ViewHolder's View
             nameview = view.findViewById(R.id.Rname)
@@ -29,7 +28,6 @@ class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>) :
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(inflater.inflate(R.layout.fragment_restaurant_card, parent, false))
     }
-
 
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -47,10 +45,7 @@ class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>) :
 
         holder.itemView.setOnClickListener { v ->
             Toast.makeText(v.context, restaurant.name, Toast.LENGTH_SHORT).show()
-        }
-
-        holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, restaurant.name, Toast.LENGTH_SHORT).show()
+            MapsFragment().onFoodItemClick(restaurant)
         }
     }
 

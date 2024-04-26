@@ -50,7 +50,7 @@ class RestaurantFragmentScroll : Fragment() {
 //            retlist.add(Restaurant(name,40.71883,-73.988281,"https://www.recipetineats.com/wp-content/uploads/2023/11/Avocado-salad_0.jpg"))
 //        }
 
-
         return restaurantsglobal
     }
+
 }
