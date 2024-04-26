@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:id="@+id/chatInputScreen">
 
 
@@ -11,10 +13,12 @@
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="35dp"
         android:text="What are you craving?"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="20dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
@@ -24,8 +28,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Light"
+        android:text="LIGHT"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider1"
@@ -33,7 +38,7 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider1"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
 
         android:layout_marginTop="20dp"
@@ -42,6 +47,7 @@
         android:valueTo="6"
         android:value="3"
 
+        app:labelBehavior="gone"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -53,8 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Heavy"
+        android:text="HEAVY"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider1"
         app:layout_constraintTop_toTopOf="@+id/slider1" />
@@ -67,8 +74,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Sweet"
+        android:text="SWEET"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider2"
@@ -76,7 +84,7 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider2"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
 
         android:layout_marginTop="20dp"
@@ -84,6 +92,8 @@
         android:valueFrom="0"
         android:valueTo="6"
         android:value="3"
+
+        app:labelBehavior="gone"
 
         app:layout_constraintTop_toBottomOf="@id/slider1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,8 +106,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Savory"
+        android:text="SAVORY"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider2"
         app:layout_constraintTop_toTopOf="@+id/slider2" />
@@ -109,8 +120,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Mild"
+        android:text="MILD"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider3"
@@ -118,7 +130,7 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider3"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
 
         android:layout_marginTop="20dp"
@@ -126,7 +138,7 @@
         android:valueFrom="0"
         android:valueTo="6"
         android:value="3"
-
+        app:labelBehavior="gone"
         app:layout_constraintTop_toBottomOf="@id/slider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -138,8 +150,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Spicy"
+        android:text="SPICY"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider3"
         app:layout_constraintTop_toTopOf="@+id/slider3" />
@@ -150,8 +163,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="West"
+        android:text="WEST"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider4"
@@ -159,7 +173,7 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider4"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
 
         android:layout_marginTop="20dp"
@@ -167,7 +181,7 @@
         android:valueFrom="0"
         android:valueTo="6"
         android:value="3"
-
+        app:labelBehavior="gone"
         app:layout_constraintTop_toBottomOf="@id/slider3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -179,8 +193,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="East"
+        android:text="EAST"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider4"
         app:layout_constraintTop_toTopOf="@+id/slider4" />
@@ -192,8 +207,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Veggie"
+        android:text="VEGGIE"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider5"
@@ -201,7 +217,7 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider5"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
 
         android:layout_marginTop="20dp"
@@ -209,7 +225,7 @@
         android:valueFrom="0"
         android:valueTo="6"
         android:value="3"
-
+        app:labelBehavior="gone"
         app:layout_constraintTop_toBottomOf="@id/slider4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -221,8 +237,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Meat"
+        android:text="MEAT"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider5"
         app:layout_constraintTop_toTopOf="@+id/slider5" />
@@ -234,8 +251,9 @@
         android:layout_marginTop="0dp"
 
         android:layout_marginLeft="5dp"
-        android:text="Breakfast"
+        android:text="MORNING"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/slider6"
@@ -243,13 +261,14 @@
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider6"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         app:trackHeight="10dp"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:valueFrom="0"
         android:valueTo="6"
         android:value="3"
+        app:labelBehavior="gone"
         app:layout_constraintTop_toBottomOf="@id/slider5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -261,8 +280,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:text="Late Night"
+        android:text="NIGHT"
         android:textSize="14dp"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toEndOf="@+id/slider6"
         app:layout_constraintTop_toTopOf="@+id/slider6" />
@@ -294,13 +314,16 @@
         android:id="@+id/exploreButton"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        android:layout_marginBottom="212dp"
-        android:text="Explore"
-        android:textSize="10dp"
+        android:layout_marginBottom="130dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="EXPLORE"
+        android:textSize="22dp"
         app:layout_constraintTop_toBottomOf="@id/slider6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:radius="120dp"/>
 
 <!--    <AutoCompleteTextView-->
 <!--        android:layout_width="@dimen/button_width"-->

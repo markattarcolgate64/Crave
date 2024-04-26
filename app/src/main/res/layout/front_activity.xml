@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:id="@+id/chatInputScreen">
+
+
+
+    <ImageButton
+        android:id="@+id/my_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_double_arrow_24"
+        android:contentDescription="Button"
+        android:padding="16dp"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="130dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        android:radius="120dp"/>
+
+    <!--    <AutoCompleteTextView-->
+    <!--        android:layout_width="@dimen/button_width"-->
+    <!--        android:layout_height="@dimen/button_height"-->
+    <!--        android:layout_marginBottom="76dp"-->
+    <!--        android:textSize="8dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/exploreButton"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.489"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:id="@+id/radiusText"-->
+    <!--        android:hint="Distance"/>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

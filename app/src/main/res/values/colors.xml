@@ -16,8 +16,9 @@
 -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#FFDD32</color>
+    <color name="colorPrimaryDark">#FBD723</color>
+    <color name="colorBackground">#FFFCDF</color>
     <color name="colorAccent">#FF4081</color>
     <array name="pastel_colors">
         <item>#AED9E0</item> <!-- pastel blue -->
