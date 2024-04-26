@@ -1,6 +1,5 @@
 package com.example.lowkeytravelapp
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -9,8 +8,13 @@ data class Restaurant(
     val name: String,
     val latitude: Double,
     val longitude: Double,
-    val address: String,
-    val imageUrl:String
+//    val price: String,
+//    val rating: Float,
+    val imageUrl:String,
+//    val numReviews: Int,
+//    val distance: Double,
+//    val isOpen: Boolean,
+//    val openingHours: String
 // Optional, can be omitted if not needed
 ) : Parcelable
 

@@ -1,18 +1,8 @@
 package com.example.lowkeytravelapp
 
-import android.content.Context
-import android.content.Intent
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 
 
 class PlaceFinder{
@@ -43,6 +33,7 @@ class PlaceFinder{
                     if (placesjsonObject.getString("status") == NO_PLACES_FOUND){
                         flag = true
                        Log.i(TAG,"No places found")
+                        println("No places found")
                     } else {
                         try{
                             var next_place_token: String = ""
@@ -98,10 +89,9 @@ class PlaceFinder{
                     val photoReference = photo.getString("photo_reference")
                     val width = photo.getInt("width")
                     val photoUrl = getImageUrl(photoReference, width)
-                    placesList.add(Restaurant(placeName, lat, lng, address, photoUrl))
+                    placesList.add(Restaurant(placeName, lat, lng, photoUrl))
                 }
             }
-
         }
 
 

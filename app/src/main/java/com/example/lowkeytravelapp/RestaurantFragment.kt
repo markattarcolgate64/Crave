@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 
 class RestaurantFragment : Fragment() {
 
+    private val dummyRestaurantList = ArrayList<Restaurant>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

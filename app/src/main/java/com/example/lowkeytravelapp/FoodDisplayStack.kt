@@ -115,7 +115,9 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
             paginate()
         }
         println("swiped my guy: $index : ${foodNames[index]}")
-        closeFragmentWithData(foodNames[index])
+        if (direction.toString() == "Right") {
+            closeFragmentWithData(foodNames[index])
+        }
     }
 
     override fun onCardRewound() {

@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     private var latitude = 40.713713//location!!.latitude
     // Example latitude
     private var longitude = -73.99004//location.longitude // Example longitude
-
     companion object{
         val TAG = "MainActivity"
     }
@@ -38,6 +37,12 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         mapArgs.putParcelable("restaurantsList", placesList)
         mapFrag.arguments = mapArgs
         replaceFragment(R.id.fragment_container, mapFrag)
+
+        val restaurantFragmentScroll = RestaurantFragmentScroll()
+        val scrollArgs = Bundle()
+        scrollArgs.putParcelable("restaurantsList", placesList)
+        restaurantFragmentScroll.arguments = scrollArgs
+        replaceFragment(R.id.restaurant_fragment_container,restaurantFragmentScroll)
     }
 
     override fun onError(message: String) {
@@ -201,11 +206,11 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                     val chatResponse = response.body()
                     val food = chatResponse?.choices?.firstOrNull()?.message?.content
                     val foodString: List<String> = food.toString().split(", ")
-                    val foodSackFrag = FoodDisplayStackFragment()
+                    val foodStackFrag = FoodDisplayStackFragment()
                     val foodArgs = Bundle()
                     foodArgs.putStringArrayList("food", ArrayList(foodString))
-                    foodSackFrag.arguments = foodArgs
-                    replaceFragment(R.id.fragment_container, foodSackFrag)
+                    foodStackFrag.arguments = foodArgs
+                    replaceFragment(R.id.fragment_container, foodStackFrag)
                     // Set this activity as the listener for fragment events
                     Log.d("Return from GPT","Response: ${chatResponse?.choices?.firstOrNull()?.message?.content}" )
                 } else {
@@ -226,11 +231,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     override fun onFragmentClosed(data: String) {
         // Handle the data received from the fragment here
         println("Data received from fragment: $data ")
-        val radius = 100 // Radius in meters
-//        Example longitude
-        latitude = 40.713713//location!!.latitude
-        longitude = -73.99004//location.longitude
-
+        val radius = 20000 // Radius in meters
         // Call the searchPlaces method to initiate the search
 
         CoroutineScope(Dispatchers.IO).launch{

@@ -89,7 +89,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         for (restaurant in restaurants) {
             val location = LatLng(restaurant.latitude, restaurant.longitude)
             println("location: $location Name: ${restaurant.name}")
-            map!!.addMarker(MarkerOptions().position(location).title(restaurant.name).snippet(restaurant.address))
+            map!!.addMarker(MarkerOptions().position(location).title(restaurant.name))
         }
     }
 

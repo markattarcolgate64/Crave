@@ -4,13 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Container for the main fragment -->
     <FrameLayout
-        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <!-- Container for the main fragment -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!-- Container for the restrant cards fragment -->
+        <FrameLayout
+            android:id="@+id/restaurant_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            />
 
+    </FrameLayout>
     <!-- Button to find food -->
 <!--    <Button-->
 <!--        android:id="@+id/find_food_button"-->
