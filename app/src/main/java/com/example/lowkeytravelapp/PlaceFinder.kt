@@ -6,71 +6,75 @@ import org.json.JSONObject
 
 
 class PlaceFinder{
-
         lateinit var callback: OnPlacesReadyCallback
-
         //It will need a list to hold all of the JSON entries probably
         lateinit var places: List<JSONObject>
         private var TAG = "PlacesActivity"
         private val NO_PLACES_FOUND = "ZERO_RESULTS"
         private var flag = false
         private var placesStore: ArrayList<Restaurant> = arrayListOf()
-
-
         //Method to conduct HTTPrequest to the Google places API
         fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double): RestaurantList{
            // viewModelScope.launch(Dispatchers.IO){
+            var radiusParam = radius
+            var placesFound = NO_PLACES_FOUND
+            var placesjsonObject: JSONObject = JSONObject()
+            while (placesFound == NO_PLACES_FOUND && radiusParam <= (radius * 10)) {
                 val placesList = khttp.get(
                     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                             "&location=$lat%2C$lon" +
-                            "&radius=$radius" +
+                            "&radius=$radiusParam" +
                             "&keyword=$keyword" +
                             "&type=restaurant" +
                             "&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
                 )
-                var placesjsonObject: JSONObject = placesList.jsonObject
-                if (placesjsonObject.has("status")){
-                    if (placesjsonObject.getString("status") == NO_PLACES_FOUND){
-                        flag = true
-                       Log.i(TAG,"No places found")
-                        println("No places found")
+                placesjsonObject = placesList.jsonObject
+                if (placesjsonObject.has("status")) {
+                    placesFound = placesjsonObject.getString("status")
+                    if (placesFound == NO_PLACES_FOUND) {
+                        radiusParam += 500
+                        Log.i(TAG, "No places found")
                     } else {
-                        try{
-                            var next_place_token: String = ""
+                        break
+                    }
+                } else {
+                    Log.i(TAG, "Status token in API response not found")
+                }
+            }
+                if (placesFound != NO_PLACES_FOUND) {
+                    try {
+                        var next_place_token: String = ""
+                        val resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
 
-                            val resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
+                        parseResults(resultsArr, placesStore)
 
-                            parseResults(resultsArr, placesStore)
-
-                            //While loop to parse the results repeatedly if there are subsequent pages past the first page
-                            while (placesjsonObject.has("next_place_token")) {
-                                next_place_token = placesjsonObject.getString("next_page_token")
-
-                                //Make request to google places for next list
-                                //Pull the results
-                                val new_response = khttp.get(
-                                    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-                                            "&pagetoken$next_place_token" +
-                                            "&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
-                                )
-                                placesjsonObject = new_response.jsonObject
-                                //Enter any new into the results
-                                val new_resultsArr: JSONArray = placesjsonObject.getJSONArray("results")
-                                parseResults(new_resultsArr, placesStore)
-                            }
+                        //While loop to parse the results repeatedly if there are subsequent pages past the first page
+                        while (placesjsonObject.has("next_place_token")) {
+                            next_place_token = placesjsonObject.getString("next_page_token")
+                            //Make request to google places for next list
+                            //Pull the results
+                            val new_response = khttp.get(
+                                url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
+                                        "&pagetoken$next_place_token" +
+                                        "&key=${BuildConfig.GOOGLE_CLOUD_API_KEY}"
+                            )
+                            placesjsonObject = new_response.jsonObject
+                            //Enter any new into the results
+                            val new_resultsArr: JSONArray =
+                                placesjsonObject.getJSONArray("results")
+                            parseResults(new_resultsArr, placesStore)
+                        }
 //                           withContext(Dispatchers.Main){
 //                               callback.onPlacesReady(RestaurantList(placesStore))
 //                           }
-                            return RestaurantList(placesStore)
-                        } catch (error: Error){
-                            Log.i(TAG, "DIDN'T WORK")
-                        }
+                        return RestaurantList(placesStore)
+                    } catch (error: Error) {
+                        Log.i(TAG, "DIDN'T WORK")
+                    }
                     //}
                 }
-            }
             Log.i(TAG, "DIDN'T PASS IF STATEMENT")
             return RestaurantList(placesStore)
-
         }
 
         private fun parseResults(resultsArr:JSONArray, placesList: ArrayList<Restaurant>){
@@ -93,7 +97,6 @@ class PlaceFinder{
                 }
             }
         }
-
 
         private fun getImageUrl(photoReference: String, maxWidth: Int): String {
             val apiKey = BuildConfig.GOOGLE_CLOUD_API_KEY

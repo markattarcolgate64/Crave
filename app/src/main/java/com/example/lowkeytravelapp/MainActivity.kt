@@ -208,7 +208,8 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                     val foodString: List<String> = food.toString().split(", ")
                     val foodStackFrag = FoodDisplayStackFragment()
                     val foodArgs = Bundle()
-                    foodArgs.putStringArrayList("food", ArrayList(foodString))
+                    val foodList = ArrayList(foodString)
+                    foodArgs.putStringArrayList("food", foodList)
                     foodStackFrag.arguments = foodArgs
                     replaceFragment(R.id.fragment_container, foodStackFrag)
                     // Set this activity as the listener for fragment events
@@ -231,7 +232,11 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     override fun onFragmentClosed(data: String) {
         // Handle the data received from the fragment here
         println("Data received from fragment: $data ")
-        val radius = 20000 // Radius in meters
+
+        val radius = 500 // Radius in meters
+//        Example longitude
+        latitude = 40.713713//location!!.latitude
+        longitude = -73.99004//location.longitude
         // Call the searchPlaces method to initiate the search
 
         CoroutineScope(Dispatchers.IO).launch{
@@ -245,7 +250,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                 onPlacesReady(restaurants)
             }
         }
-        // You can perform any actions you need with the received data
+    // You can perform any actions you need with the received data
     }
 
     private fun replaceFragment(containerId: Int, replacement: Fragment) {
@@ -253,7 +258,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
             .replace(containerId, replacement)
             .commit()
     }
-
 }
 
 interface OpenAIApiService {

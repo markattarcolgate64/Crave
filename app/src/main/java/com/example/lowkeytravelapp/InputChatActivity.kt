@@ -17,7 +17,6 @@ import com.google.android.material.slider.Slider
 class InputChatActivity: ComponentActivity() {
     private lateinit var output: String
     private lateinit var exploreButton: Button
-
     private lateinit var slider1: Slider
     private lateinit var slider2: Slider
     private lateinit var slider3: Slider
@@ -26,12 +25,10 @@ class InputChatActivity: ComponentActivity() {
     private lateinit var slider6: Slider
 
 
-
-
-
     companion object{
         val TAG = "InputChatActivity"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +36,6 @@ class InputChatActivity: ComponentActivity() {
         setContentView(R.layout.chat_input_screen)
 //        chatInput = findViewById(R.id.chatEntry)
         exploreButton = findViewById(R.id.exploreButton)
-
-
-
-
-//
 
 
 //        radiusTextView = findViewById(R.id.radiusText)
@@ -76,7 +68,6 @@ class InputChatActivity: ComponentActivity() {
             val slider6Value: Float = slider6.value
 
 
-
             val sharedPreferences = getSharedPreferences("Prefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putFloat("light", slider1Value)
@@ -87,7 +78,6 @@ class InputChatActivity: ComponentActivity() {
             editor.putFloat("time", slider6Value)
 
             editor.apply()
-
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
