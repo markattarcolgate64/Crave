@@ -1,6 +1,5 @@
 package com.example.lowkeytravelapp
 
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,8 +21,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.example.lowkeytravelapp.R.layout
 import com.example.lowkeytravelapp.R.string
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
 import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient

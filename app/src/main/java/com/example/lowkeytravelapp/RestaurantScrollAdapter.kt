@@ -9,9 +9,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>) :
+class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>, private val interactionListener: RestaurantListInterface
+) :
     RecyclerView.Adapter<RestaurantScrollAdapter.ViewHolder>() {
 //    private var spots: List<Spot> = emptyList()
+
+
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameview: TextView
@@ -44,8 +48,8 @@ class RestaurantScrollAdapter(private val restaurants: ArrayList<Restaurant>) :
             .into(holder.imageView)
 
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, restaurant.name, Toast.LENGTH_SHORT).show()
-            MapsFragment().onFoodItemClick(restaurant)
+           // Toast.makeText(v.context, restaurant.name, Toast.LENGTH_SHORT).show()
+            interactionListener.onFoodItemClick(restaurant)
         }
     }
 
