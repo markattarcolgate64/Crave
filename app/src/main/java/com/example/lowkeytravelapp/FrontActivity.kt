@@ -1,24 +1,30 @@
 package com.example.lowkeytravelapp
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
-import androidx.activity.ComponentActivity
-import android.content.Intent
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.slider.Slider
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
+import androidx.activity.ComponentActivity
 
-class SplashScreenActivity: ComponentActivity(){
+class FrontActivity: ComponentActivity(){
+    private lateinit var nextButton: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.front_activity)
 
-    }
+        nextButton = findViewById(R.id.nextButton)
 
+        nextButton.setOnClickListener{
+
+
+            val intent = Intent(this, InputChatActivity::class.java)
+            startActivity(intent)
+//             intent.putExtra("Slider1", slider1Value)
+
+        }
+
+
+    }
 }

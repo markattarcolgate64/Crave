@@ -27,10 +27,6 @@
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -40,6 +36,22 @@
             >
 
 
+
+        </activity>
+        <activity android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+
+        </activity>
+
+        <activity android:name=".FrontActivity"
+            android:exported="true"
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>
