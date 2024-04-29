@@ -22,18 +22,17 @@
 
             <ImageView
                 android:id="@+id/Rimage"
-                android:layout_width="250dp"
-                android:layout_height="125dp"
-                android:layout_centerHorizontal="true"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
                 android:src="@drawable/baseline_restaurant"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+            />
 
             <RelativeLayout
                 android:id="@+id/line1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Rimage"
-                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -59,8 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line1"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="150dp">
                 <TextView
                     android:id="@+id/Rstarstext"
                     android:layout_width="wrap_content"
@@ -101,21 +100,21 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/line3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/line2"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Closed · Opens 13 AM Fri"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="16sp" />
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/line3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/line2"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:orientation="horizontal">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/open"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="3dp"-->
+<!--                    android:text="Closed · Opens 13 AM Fri"-->
+<!--                    android:textColor="@android:color/holo_red_light"-->
+<!--                    android:textSize="16sp" />-->
 
             <!--    <TextView-->
             <!--        android:id="@+id/hours"-->
@@ -128,7 +127,7 @@
             <!--        android:textColor="@android:color/holo_red_light"-->
             <!--        android:textSize="16sp" />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class RestaurantFragmentScroll : Fragment() {
+class RestaurantFragmentScroll : Fragment(), RestaurantListInterface{
 
     private lateinit var recyclerview: RecyclerView
     private lateinit var adapter: RestaurantScrollAdapter
@@ -24,13 +25,20 @@ class RestaurantFragmentScroll : Fragment() {
         val restaurantList = arguments?.getParcelable("restaurantsList", RestaurantList::class.java)
         val restaurants: ArrayList<Restaurant> = restaurantList!!.restaurants
         restaurantsglobal = restaurants
-
         recyclerview = view.findViewById(R.id.recyclerview)
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        adapter = RestaurantScrollAdapter(getSampleRestaurantData())
+        adapter = RestaurantScrollAdapter(getSampleRestaurantData(), this)
         recyclerview.adapter = adapter
 
         return view
+    }
+
+    override fun onFoodItemClick(restaurant: Restaurant) {
+        Toast.makeText(requireActivity(), "onFoodItemClick interface working", Toast.LENGTH_SHORT).show()
+        val clickBundle = Bundle()
+        clickBundle.putParcelable("restaurant",restaurant)
+        requireActivity().supportFragmentManager.setFragmentResult("restaurantClick", clickBundle)
+
     }
 
 
@@ -50,7 +58,7 @@ class RestaurantFragmentScroll : Fragment() {
 //            retlist.add(Restaurant(name,40.71883,-73.988281,"https://www.recipetineats.com/wp-content/uploads/2023/11/Avocado-salad_0.jpg"))
 //        }
 
-
         return restaurantsglobal
     }
+
 }

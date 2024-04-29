@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -91,6 +92,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             println("location: $location Name: ${restaurant.name}")
             map!!.addMarker(MarkerOptions().position(location).title(restaurant.name))
         }
+
+        requireActivity().supportFragmentManager.setFragmentResultListener("restaurantClick", requireActivity()) { requestKey, Bundle ->
+            val clickRestaurant = Bundle.getParcelable("restaurant", Restaurant::class.java)
+            moveCamera(clickRestaurant!!.latitude, clickRestaurant.longitude)
+        }
+
     }
 
     /**
@@ -223,5 +230,19 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         const val DEFAULT_ZOOM = 15
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
         private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    }
+
+    private fun moveCamera(latitude: Double, longitude: Double) {
+        //Implement code to move camera
+        Log.i(TAG, "Interface working")
+        map?.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    latitude,
+                    longitude
+                ), DEFAULT_ZOOM.toFloat()
+            )
+        )
+
     }
 }

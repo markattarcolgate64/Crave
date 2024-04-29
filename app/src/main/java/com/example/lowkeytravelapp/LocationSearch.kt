@@ -26,11 +26,9 @@ class LocationSearch : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.location_search)
-
         if (!Places.isInitialized()) {
             Places.initialize(applicationContext, BuildConfig.GOOGLE_CLOUD_API_KEY)
         }
-
         setupPlaceAutocomplete()
         setupCurrentLocationButton()
     }

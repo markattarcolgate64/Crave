@@ -51,6 +51,7 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
     private lateinit var adapter: CardStackAdapter
     private lateinit var foodNames: ArrayList<String>
     private var listener: OnFragmentClosedListener? = null
+
     private var index = 0
 
     override fun onCreateView(
@@ -76,7 +77,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
             val adapter = initializeAdapter()
             cardStackView.adapter = adapter
         }
-
         view?.let { setupNavigation(it) }
         view?.let { setupButton(it) }
         initialize()
@@ -459,8 +459,6 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
         })
     }
 
-
-
     fun setOnFragmentClosedListener(listener: OnFragmentClosedListener) {
         this.listener = listener
     }
@@ -475,4 +473,8 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
     interface OnFragmentClosedListener {
         fun onFragmentClosed(data: String)
     }
+
+
+
+
 }
