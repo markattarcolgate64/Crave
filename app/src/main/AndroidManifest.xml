@@ -20,7 +20,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyAWv8WlIvbekJ38sqn3F2ndXk50aFyiVAY" />
 
 
         <activity

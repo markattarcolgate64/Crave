@@ -23,4 +23,13 @@
     <string name="remove_spot_from_last">Remove spot from last</string>
     <string name="replace_first_spot">Replace first spot</string>
     <string name="swap_first_for_last">Swap first for last</string>
+
+    <string name="simple_direction">Simple Direction</string>
+    <string name="transit_direction">Transit Direction</string>
+    <string name="alternative_direction">Alternative Direction</string>
+    <string name="waypoints_direction">Waypoints Direction</string>
+    <string name="request_direction">Request Direction</string>
+    <string name="success_with_status">Success with status : %1$s</string>
+    <string name="success_with_empty">Success with empty result</string>
+    <string name="direction_requesting">Direction Requesting…</string>
 </resources>

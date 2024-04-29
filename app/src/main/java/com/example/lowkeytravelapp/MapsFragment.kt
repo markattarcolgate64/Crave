@@ -1,8 +1,10 @@
 package com.example.lowkeytravelapp
 
+//import com.akexorcist.googledirection.sample.databinding.ActivitySimpleDirectionBinding
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -10,11 +12,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.akexorcist.googledirection.GoogleDirection
+import com.akexorcist.googledirection.config.GoogleDirectionConfiguration
+import com.akexorcist.googledirection.constant.TransportMode
+import com.akexorcist.googledirection.model.Direction
+import com.akexorcist.googledirection.model.Route
+import com.akexorcist.googledirection.util.DirectionConverter
+import com.akexorcist.googledirection.util.execute
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,11 +31,21 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
+
+    companion object {
+        const val TAG = "MapsFragment"
+        const val DEFAULT_ZOOM = 15
+        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+        private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    }
+
+
     var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
 
@@ -45,6 +63,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private var lastKnownLocation: Location? = null
+    private var origin = defaultLocation
+    private var destination = LatLng(37.7814432, -122.4460177)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,6 +116,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         requireActivity().supportFragmentManager.setFragmentResultListener("restaurantClick", requireActivity()) { requestKey, Bundle ->
             val clickRestaurant = Bundle.getParcelable("restaurant", Restaurant::class.java)
             moveCamera(clickRestaurant!!.latitude, clickRestaurant.longitude)
+            destination = LatLng(clickRestaurant.latitude, clickRestaurant.longitude)
+            getDeviceLocation()
+//            destination = LatLng(clickRestaurant)
+            requestDirection()
         }
 
     }
@@ -110,22 +134,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         lastKnownLocation = location
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude
-                                ), DEFAULT_ZOOM.toFloat()
-                            )
-                        )
+                        origin = LatLng(lastKnownLocation!!.longitude,lastKnownLocation!!.latitude)
+                        moveCamera(lastKnownLocation!!.longitude,lastKnownLocation!!.latitude)
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                defaultLocation,
-                                DEFAULT_ZOOM.toFloat()
-                            )
-                        )
+                        moveCamera(defaultLocation.longitude,defaultLocation.latitude)
+                        origin = defaultLocation
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }
                 }
@@ -225,13 +239,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         return lastKnownLocation
     }
 
-    companion object {
-        const val TAG = "MapsFragment"
-        const val DEFAULT_ZOOM = 15
-        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-        private val defaultLocation = LatLng(-33.8523341, 151.2106085)
-    }
-
     private fun moveCamera(latitude: Double, longitude: Double) {
         //Implement code to move camera
         Log.i(TAG, "Interface working")
@@ -243,6 +250,64 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 ), DEFAULT_ZOOM.toFloat()
             )
         )
-
     }
+
+    private fun requestDirection() {
+        // Handle request direction button click
+        println(getString(R.string.direction_requesting))
+
+        // Set up Google Direction API configuration
+        GoogleDirectionConfiguration.getInstance().isLogEnabled = BuildConfig.DEBUG
+        lastKnownLocation?.let { LatLng(it.latitude, lastKnownLocation!!.longitude) }?.let {
+            GoogleDirection.withServerKey(BuildConfig.GOOGLE_CLOUD_API_KEY)
+                .from(it)
+                .to(destination)
+                .transportMode(TransportMode.DRIVING)
+                .execute(
+                    onDirectionSuccess = { direction -> onDirectionSuccess(direction) },
+                    onDirectionFailure = { t -> onDirectionFailure(t) }
+                )
+        }
+    }
+
+    private fun onDirectionSuccess(direction: Direction?) {
+        // Handle direction request success
+        direction?.let {
+            println(getString(R.string.success_with_status, direction.status))
+            if (direction.isOK) {
+                val route = direction.routeList[0]
+//                map?.addMarker(MarkerOptions().position(origin))
+//                map?.addMarker(MarkerOptions().position(destination))
+                val directionPositionList = route.legList[0].directionPoint
+                map?.addPolyline(
+                    DirectionConverter.createPolyline(
+                        requireContext(),
+                        directionPositionList,
+                        5,
+                        Color.RED
+                    )
+                )
+                setCameraWithCoordinationBounds(route)
+            } else {
+                println(direction.status)
+            }
+        } ?: run {
+            println(getString(R.string.success_with_empty))
+        }
+    }
+
+    private fun onDirectionFailure(t: Throwable) {
+        // Handle direction request failure
+        println(t.message)
+    }
+
+    private fun setCameraWithCoordinationBounds(route: Route) {
+        // Set camera view with coordination bounds
+        val southwest = route.bound.southwestCoordination.coordination
+        val northeast = route.bound.northeastCoordination.coordination
+        val bounds = LatLngBounds(southwest, northeast)
+        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+    }
+
+
 }

@@ -11,8 +11,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -20,7 +18,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.example.lowkeytravelapp.R.layout
-import com.example.lowkeytravelapp.R.string
 import com.google.android.material.navigation.NavigationView
 import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient
@@ -398,13 +395,13 @@ class FoodDisplayStackFragment : Fragment(), CardStackListener {
 
     private fun setupNavigation(view: View) {
         // Toolbar
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+//        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         // setSupportActionBar(toolbar)
 
         // DrawerLayout
-        val actionBarDrawerToggle = ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, string.open_drawer, string.close_drawer)
-        actionBarDrawerToggle.syncState()
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+//        val actionBarDrawerToggle = ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, string.open_drawer, string.close_drawer)
+//        actionBarDrawerToggle.syncState()
+//        drawerLayout.addDrawerListener(actionBarDrawerToggle)
 
         // NavigationView
         val navigationView = view.findViewById<NavigationView>(R.id.navigation_view)
