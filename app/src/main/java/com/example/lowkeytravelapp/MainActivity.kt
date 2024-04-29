@@ -1,10 +1,19 @@
 package com.example.lowkeytravelapp
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,18 +32,26 @@ import retrofit2.http.POST
 
 class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     FoodDisplayStackFragment.OnFragmentClosedListener {
-
+    private var lastKnownLocation: Location? = null
     private var latitude = 40.713713//location!!.latitude
     // Example latitude
     private var longitude = -73.99004//location.longitude // Example longitude
+    private val defaultLocation = LatLng(40.713713, -73.99004)
+    private var locationPermissionGranted = false
+    private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     companion object{
         val TAG = "MainActivity"
+
     }
 
     override fun onPlacesReady(placesList: RestaurantList) {
         val mapFrag = MapsFragment()
         val mapArgs = Bundle()
         mapArgs.putParcelable("restaurantsList", placesList)
+        mapArgs.putDouble("latitude", latitude)
+        mapArgs.putDouble("longitude", longitude)
         mapFrag.arguments = mapArgs
         replaceFragment(R.id.fragment_container, mapFrag)
 
@@ -53,6 +70,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         println("MAIN ACTIVITY")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         gptFilter()
         //Loads in FoodDisplay fragment
@@ -60,7 +78,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         //viewModel = ViewModelProvider(this).get(PlaceFinder::class.java)
         //37.422131, -122.084801
         //viewModel.searchPlaces("", 100, 40.713713, 73.990041)
-
         //Loads in FoodDisplay fragment
         //The restaurant data is passed to the maps fragment
 //        viewModel = ViewModelProvider(this).get(PlaceFinder::class.java)
@@ -219,7 +236,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                     Log.d(TAG, "Failed")
                     val errorBody = response.errorBody()?.string()
                     Log.e("GPT ERROR OCCURRED WITH API", "Failed with status: ${response.code()} and error: $errorBody")
-
                 }
             }
 
@@ -232,25 +248,41 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     override fun onFragmentClosed(data: String) {
         // Handle the data received from the fragment here
         println("Data received from fragment: $data ")
-
         val radius = 500 // Radius in meters
-//        Example longitude
         latitude = 40.713713//location!!.latitude
-        longitude = -73.99004//location.longitude
-        // Call the searchPlaces method to initiate the search
-
-        CoroutineScope(Dispatchers.IO).launch{
-            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
-                data,
-                radius,
-                latitude,
-                longitude
-            )
-            withContext(Dispatchers.Main){
-                onPlacesReady(restaurants)
+        longitude = -73.99004
+        getLocationPermission()
+        try {
+            if (locationPermissionGranted) {
+                fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        lastKnownLocation = location
+                        latitude = lastKnownLocation!!.latitude
+                        longitude = lastKnownLocation!!.longitude
+                        Log.i(TAG, "GOT INSIDE LOCATION PROVIDER")
+                        CoroutineScope(Dispatchers.IO).launch{
+                            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
+                                data,
+                                radius,
+                                latitude,
+                                longitude
+                            )
+                            withContext(Dispatchers.Main){
+                                onPlacesReady(restaurants)
+                            }
+                        }
+                    } else {
+                        Log.d(MapsFragment.TAG, "Current location is null. Using defaults.")
+                        //getLocationPermission()
+                    }
+                }
             }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
         }
-    // You can perform any actions you need with the received data
+
+            //location.longitude // Call the searchPlaces method to initiate the search
+
     }
 
     private fun replaceFragment(containerId: Int, replacement: Fragment) {
@@ -258,7 +290,40 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
             .replace(containerId, replacement)
             .commit()
     }
+
+    private fun getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+        }
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>,
+                                            grantResults: IntArray) {
+        locationPermissionGranted = false
+        when (requestCode) {
+            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionGranted = true
+                }
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
+
 }
+
+
+
 
 interface OpenAIApiService {
     @Headers("Content-Type: application/json")

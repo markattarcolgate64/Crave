@@ -16,6 +16,8 @@ class PlaceFinder{
         //Method to conduct HTTPrequest to the Google places API
         fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double): RestaurantList{
            // viewModelScope.launch(Dispatchers.IO){
+            Log.i(MainActivity.TAG, "GOT INSIDE PLACE FINDER")
+
             var radiusParam = radius
             var placesFound = NO_PLACES_FOUND
             var placesjsonObject: JSONObject = JSONObject()
