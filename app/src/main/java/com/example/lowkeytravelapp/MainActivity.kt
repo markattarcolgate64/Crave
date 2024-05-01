@@ -1,12 +1,11 @@
 package com.example.lowkeytravelapp
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -226,7 +225,19 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                     val foodStackFrag = FoodDisplayStackFragment()
                     val foodArgs = Bundle()
                     val foodList = ArrayList(foodString)
-                    foodArgs.putStringArrayList("food", foodList)
+                    val fastFoodPlaces = arrayListOf(
+                        "McDonald's",
+                        "Burger King",
+                        "KFC",
+                        "Subway",
+                        "Wendy's",
+                        "Taco Bell",
+                        "Pizza Hut",
+                        "Domino's Pizza",
+                        "Chick-fil-A",
+                        "Popeyes Louisiana Kitchen"
+                    )
+                    foodArgs.putStringArrayList("food", fastFoodPlaces)
                     foodStackFrag.arguments = foodArgs
                     replaceFragment(R.id.fragment_container, foodStackFrag)
                     // Set this activity as the listener for fragment events
@@ -248,7 +259,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     override fun onFragmentClosed(data: String) {
         // Handle the data received from the fragment here
         println("Data received from fragment: $data ")
-        val radius = 500 // Radius in meters
+        val radius = 10000 // Radius in meters
         latitude = 40.713713//location!!.latitude
         longitude = -73.99004
         getLocationPermission()
@@ -321,9 +332,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     }
 
 }
-
-
-
 
 interface OpenAIApiService {
     @Headers("Content-Type: application/json")

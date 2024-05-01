@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
@@ -48,6 +49,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
+    private var polyline: Polyline? = null
+
 
     // The entry point to the Places API.
     private lateinit var placesClient: PlacesClient
@@ -100,6 +103,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getLocationPermission()
+        lastKnownLocation?.let { moveCamera(it.latitude, lastKnownLocation!!.longitude) }
         updateLocationUI()
         getDeviceLocation()
 
@@ -118,7 +122,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             moveCamera(clickRestaurant!!.latitude, clickRestaurant.longitude)
             destination = LatLng(clickRestaurant.latitude, clickRestaurant.longitude)
             getDeviceLocation()
-//            destination = LatLng(clickRestaurant)
             requestDirection()
         }
 
@@ -279,12 +282,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 //                map?.addMarker(MarkerOptions().position(origin))
 //                map?.addMarker(MarkerOptions().position(destination))
                 val directionPositionList = route.legList[0].directionPoint
-                map?.addPolyline(
+                polyline?.remove()
+                polyline=map?.addPolyline(
                     DirectionConverter.createPolyline(
                         requireContext(),
                         directionPositionList,
                         5,
-                        Color.RED
+                        Color.BLUE
+//                        ContextCompat.getColor(requireContext(), R.color.colorPrimary)
                     )
                 )
                 setCameraWithCoordinationBounds(route)
