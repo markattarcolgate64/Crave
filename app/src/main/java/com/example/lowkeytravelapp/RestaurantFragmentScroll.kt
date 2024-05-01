@@ -34,7 +34,6 @@ class RestaurantFragmentScroll : Fragment(), RestaurantListInterface{
     }
 
     override fun onFoodItemClick(restaurant: Restaurant) {
-        Toast.makeText(requireActivity(), "onFoodItemClick interface working", Toast.LENGTH_SHORT).show()
         val clickBundle = Bundle()
         clickBundle.putParcelable("restaurant",restaurant)
         requireActivity().supportFragmentManager.setFragmentResult("restaurantClick", clickBundle)
