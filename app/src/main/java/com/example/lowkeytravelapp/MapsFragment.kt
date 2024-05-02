@@ -137,11 +137,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         lastKnownLocation = location
-                        origin = LatLng(lastKnownLocation!!.longitude,lastKnownLocation!!.latitude)
-                        moveCamera(lastKnownLocation!!.longitude,lastKnownLocation!!.latitude)
+                        origin = LatLng(lastKnownLocation!!.latitude,lastKnownLocation!!.longitude)
+                        moveCamera(lastKnownLocation!!.latitude,lastKnownLocation!!.longitude)
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
-                        moveCamera(defaultLocation.longitude,defaultLocation.latitude)
+                        moveCamera(defaultLocation.latitude,defaultLocation.longitude)
                         origin = defaultLocation
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }

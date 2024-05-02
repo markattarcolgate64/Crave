@@ -23,28 +23,16 @@
 
 <resources>
 
-<!-- Base application theme. -->
-<!--    <style name="Theme.MyApp" parent="Theme.SplashScreen">-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-<!--        &lt;!&ndash; Reference to the splash screen background color &ndash;&gt;-->
-<!--        <item name="android:windowSplashScreenBackground">@color/colorBackground</item>-->
-<!--        &lt;!&ndash; Reference to the splash screen animated icon &ndash;&gt;-->
-<!--        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>-->
-<!--        &lt;!&ndash; Splash screen animation duration &ndash;&gt;-->
-<!--        <item name="android:windowSplashScreenAnimationDuration">500</item>-->
-<!--        &lt;!&ndash; Exit animation for splash screen &ndash;&gt;-->
-<!--        <item name="postSplashScreenTheme">@style/Theme.MyApp.NoActionBar</item>-->
+<!--    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="android:windowBackground">@drawable/splash_background</item>-->
 <!--    </style>-->
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
-    </style>
 <style name="Theme.LowkeyTravelApp" parent="Theme.MaterialComponents.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowSplashScreenBackground">@drawable/crave_splashbackground</item>
+    <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo</item>
+
 </style>
-
-
-
 
 </resources>

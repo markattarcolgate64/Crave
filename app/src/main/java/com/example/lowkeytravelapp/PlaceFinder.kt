@@ -34,7 +34,7 @@ class PlaceFinder{
                 if (placesjsonObject.has("status")) {
                     placesFound = placesjsonObject.getString("status")
                     if (placesFound == NO_PLACES_FOUND) {
-                        radiusParam += 500
+                        radiusParam += radius
                         Log.i(TAG, "No places found")
                     } else {
                         break

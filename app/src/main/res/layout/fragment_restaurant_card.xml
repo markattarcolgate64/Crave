@@ -5,27 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/card_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/card_corner">
 
         <RelativeLayout
             android:id="@+id/fragmentRootLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/Rimage"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/image_rectangle"
                 android:src="@drawable/baseline_restaurant"
                 android:contentDescription="TODO"
             />
@@ -34,25 +39,19 @@
                 android:id="@+id/line1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:orientation="horizontal">
+                android:layout_marginLeft="100dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
-                <TextView
-                    android:id="@+id/Rprice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/Rname"
-                    android:text="$0-10"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/Rname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Restaurant Name · "
-                    android:textColor="@android:color/black" />
+                    android:text="Restaurant Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp"
+                    android:ellipsize="end"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -61,14 +60,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line1"
                 android:orientation="horizontal"
-                android:layout_marginLeft="150dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp">
+
                 <TextView
                     android:id="@+id/Rstarstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
                 <RatingBar
                     android:id="@+id/RatingBar"
                     android:layout_width="wrap_content"
@@ -89,7 +90,7 @@
                     android:layout_marginStart="4dp"
                     android:text="(0)"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/Rdist"
@@ -97,6 +98,15 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/Rnumbreviews"
                     android:text=" · 0.0 mi"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/Rprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/Rdist"
+                    android:text="$"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </RelativeLayout>

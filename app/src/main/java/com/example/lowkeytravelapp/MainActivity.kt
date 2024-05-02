@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
 
     companion object{
         val TAG = "MainActivity"
-
     }
 
     override fun onPlacesReady(placesList: RestaurantList) {
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         mapArgs.putDouble("longitude", longitude)
         mapFrag.arguments = mapArgs
         replaceFragment(R.id.fragment_container, mapFrag)
-
         val restaurantFragmentScroll = RestaurantFragmentScroll()
         val scrollArgs = Bundle()
         scrollArgs.putParcelable("restaurantsList", placesList)
@@ -70,7 +68,6 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
         gptFilter()
         //Loads in FoodDisplay fragment
         //The restaurant data is passed to the maps fragment
@@ -237,7 +234,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                         "Chick-fil-A",
                         "Popeyes Louisiana Kitchen"
                     )
-                    foodArgs.putStringArrayList("food", fastFoodPlaces)
+                    foodArgs.putStringArrayList("food", foodList)
                     foodStackFrag.arguments = foodArgs
                     replaceFragment(R.id.fragment_container, foodStackFrag)
                     // Set this activity as the listener for fragment events
@@ -259,7 +256,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     override fun onFragmentClosed(data: String) {
         // Handle the data received from the fragment here
         println("Data received from fragment: $data ")
-        val radius = 10000 // Radius in meters
+        val radius = 1000 // Radius in meters
         latitude = 40.713713//location!!.latitude
         longitude = -73.99004
         getLocationPermission()
