@@ -75,6 +75,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         val mapView = inflater.inflate(R.layout.fragment_maps, container, false)
+        println("GOOGLE MAPS")
 
         return mapView
     }

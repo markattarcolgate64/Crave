@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     }
 
     override fun onPlacesReady(placesList: RestaurantList) {
+        println("GOOGLE MAPS")
         val mapFrag = MapsFragment()
         val mapArgs = Bundle()
         mapArgs.putParcelable("restaurantsList", placesList)
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         mapArgs.putDouble("longitude", longitude)
         mapFrag.arguments = mapArgs
         replaceFragment(R.id.fragment_container, mapFrag)
+
         val restaurantFragmentScroll = RestaurantFragmentScroll()
         val scrollArgs = Bundle()
         scrollArgs.putParcelable("restaurantsList", placesList)

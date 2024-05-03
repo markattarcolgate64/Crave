@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/tabletop"
+    >
 
     <LinearLayout
         android:orientation="vertical"
@@ -84,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/button_container"
-                android:padding="4dp"
+                android:padding="32dp"
                 android:clipToPadding="false">
             </com.yuyakaido.android.cardstackview.CardStackView>
 
