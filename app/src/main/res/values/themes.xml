@@ -30,8 +30,7 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:windowSplashScreenBackground">@drawable/crave_splashbackground</item>
-    <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo</item>
+    <item name="android:windowSplashScreenBackground">@color/colorPrimary</item>
 
 </style>
 

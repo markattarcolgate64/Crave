@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/colorPrimary"
     android:id="@+id/chatInputScreen">
 
     <ImageButton
@@ -18,7 +18,7 @@
         android:scaleType="centerCrop"
         android:layout_marginBottom="130dp"
         android:layout_marginTop="260dp"
-        android:background="@color/colorBackground"
+        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
