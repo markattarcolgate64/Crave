@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
     private var locationPermissionGranted = false
     private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
+    private var radiusparm = 0
     companion object{
         val TAG = "MainActivity"
     }
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
         mapArgs.putParcelable("restaurantsList", placesList)
         mapArgs.putDouble("latitude", latitude)
         mapArgs.putDouble("longitude", longitude)
+        mapArgs.putInt("Radius",radiusparm)
         mapFrag.arguments = mapArgs
         replaceFragment(R.id.fragment_container, mapFrag)
 
@@ -271,12 +272,14 @@ class MainActivity : AppCompatActivity(), OnPlacesReadyCallback,
                         longitude = lastKnownLocation!!.longitude
                         Log.i(TAG, "GOT INSIDE LOCATION PROVIDER")
                         CoroutineScope(Dispatchers.IO).launch{
-                            val restaurants:RestaurantList = PlaceFinder().searchPlaces(
+                            val Placefinder = PlaceFinder()
+                            val restaurants:RestaurantList = Placefinder.searchPlaces(
                                 data,
                                 radius,
                                 latitude,
                                 longitude
                             )
+                            radiusparm = Placefinder.getraduis()
                             withContext(Dispatchers.Main){
                                 onPlacesReady(restaurants)
                             }

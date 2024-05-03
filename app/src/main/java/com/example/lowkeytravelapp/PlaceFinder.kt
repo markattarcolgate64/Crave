@@ -13,12 +13,14 @@ class PlaceFinder{
         private val NO_PLACES_FOUND = "ZERO_RESULTS"
         private var flag = false
         private var placesStore: ArrayList<Restaurant> = arrayListOf()
-        //Method to conduct HTTPrequest to the Google places API
+        var radiusParam = 0
+
+    //Method to conduct HTTPrequest to the Google places API
         fun searchPlaces(keyword:String, radius: Int, lat:Double, lon:Double): RestaurantList{
            // viewModelScope.launch(Dispatchers.IO){
             Log.i(MainActivity.TAG, "GOT INSIDE PLACE FINDER")
 
-            var radiusParam = radius
+            radiusParam = radius
             var placesFound = NO_PLACES_FOUND
             var placesjsonObject: JSONObject = JSONObject()
             while (placesFound == NO_PLACES_FOUND && radiusParam <= (radius * 10)) {
@@ -104,6 +106,10 @@ class PlaceFinder{
             val apiKey = BuildConfig.GOOGLE_CLOUD_API_KEY
             val baseUrl = "https://maps.googleapis.com/maps/api/place/photo"
             return "$baseUrl?photoreference=$photoReference&maxwidth=$maxWidth&key=$apiKey"
+        }
+
+        fun getraduis(): Int {
+            return radiusParam
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.lowkeytravelapp
 
 //import com.akexorcist.googledirection.sample.databinding.ActivitySimpleDirectionBinding
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -37,11 +38,12 @@ import com.google.android.gms.maps.model.Polyline
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 
+
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         const val TAG = "MapsFragment"
-        const val DEFAULT_ZOOM = 15
+        const val DEFAULT_ZOOM = 15.toFloat()
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
         private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     }
@@ -51,6 +53,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private var cameraPosition: CameraPosition? = null
     private var polyline: Polyline? = null
 
+    private var ZOOM = 1.0.toFloat()
 
     // The entry point to the Places API.
     private lateinit var placesClient: PlacesClient
@@ -104,9 +107,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getLocationPermission()
-        lastKnownLocation?.let { moveCamera(it.latitude, lastKnownLocation!!.longitude) }
         updateLocationUI()
+//        arguments?.getInt("Radius")?.let { calculateZoomLevel(it.toFloat()) }
+        arguments?.let { calculateZoomLevel((it.getInt("Radius")).toFloat() ) }
         getDeviceLocation()
+
+//        lastKnownLocation?.let { moveCamera(0.0, 0.0, 1.toFloat()) }
+//        moveCamera(0.0,0.0,1.toFloat())
 
         println("arguments $arguments")
 
@@ -125,7 +132,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             getDeviceLocation()
             requestDirection()
         }
-
     }
 
     /**
@@ -139,10 +145,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     if (location != null) {
                         lastKnownLocation = location
                         origin = LatLng(lastKnownLocation!!.latitude,lastKnownLocation!!.longitude)
-                        moveCamera(lastKnownLocation!!.latitude,lastKnownLocation!!.longitude)
+                        moveCamera(lastKnownLocation!!.latitude,lastKnownLocation!!.longitude,ZOOM)
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
-                        moveCamera(defaultLocation.latitude,defaultLocation.longitude)
+                        moveCamera(defaultLocation.latitude,defaultLocation.longitude,ZOOM)
                         origin = defaultLocation
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }
@@ -218,29 +224,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-//    fun searchPlaces(query: String) {
-//        val request = FindAutocompletePredictionsRequest.builder()
-//            .setQuery(query)
-//            .build()
-//
-//        placesClient.findAutocompletePredictions(request)
-//            .addOnSuccessListener { response ->
-//                for (prediction in response.autocompletePredictions) {
-//                    println("Predictions")
-//                    Log.i(TAG, prediction.placeId)
-//                    Log.i(TAG, prediction.getPrimaryText(null).toString())
-//                    // You can add markers or handle search results here
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                if (exception is ApiException) {
-//                    Log.e(TAG, "Place not found: ${exception.statusCode}")
-//                }
-//            }
-//    }
-
     fun getLastKnownLocation(): Location? {
         return lastKnownLocation
+    }
+
+    fun setZoom(newzoom: Float){
+        ZOOM = newzoom
     }
 
     private fun moveCamera(latitude: Double, longitude: Double) {
@@ -251,7 +240,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 LatLng(
                     latitude,
                     longitude
-                ), DEFAULT_ZOOM.toFloat()
+                ), DEFAULT_ZOOM+10
+            )
+        )
+    }
+
+    private fun moveCamera(latitude: Double, longitude: Double,newzoom: Float) {
+        //Implement code to move camera
+        Log.i(TAG, "Interface working")
+        map?.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    latitude,
+                    longitude
+                ), newzoom
             )
         )
     }
@@ -315,5 +317,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         map?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
     }
 
-
+    private fun calculateZoomLevel(radiusMeters: Float) {
+        fun metersToZoomLevel(meters: Float): Float {
+            var zoomLevel = 19 // Maximum zoom level
+            while (zoomLevel >= 0) {
+                // Calculate the number of meters represented by a single pixel at the current zoom level
+                val metersPerPixel = 156543.03392 * Math.cos(0.0) / Math.pow(2.0, zoomLevel.toDouble())
+                // Check if the given meters fit within the current zoom level
+                if (meters / metersPerPixel <= 256) {
+                    return zoomLevel.toFloat()
+                } else {
+                    zoomLevel -= 1
+                }
+            }
+            return 0.toFloat() // Minimum zoom level
+        }
+        println(ZOOM)
+        ZOOM  = metersToZoomLevel(radiusMeters)
+    }
 }
